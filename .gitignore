@@ -13,8 +13,6 @@ to-do.txt
 # do not ignore
 !.gitkeep
 
-# bot host
-*.replit
 ## ----- ----- ----- ----- Additions End ##
 
 # User-specific files

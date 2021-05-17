@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const emojis = require('../../utils/emojis.json');
+const emojis = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class HelpCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class HelpCommand extends Command {
       aliases: ['commands', 'h'],
       usage: 'help [command | all]',
       description: oneLine`
-        Displays a list of all current commands, sorted by category. 
+        Displays a list of all current commands, sorted by category.
         Can be used in conjunction with a command for additional information.
         Will only display commands that you have permission to access unless the \`all\` parameter is given.
       `,
@@ -29,17 +29,17 @@ module.exports = class HelpCommand extends Command {
     const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id); // Get prefix
     const { INFO, FUN, COLOR, POINTS, MISC, MOD, ADMIN, OWNER } = message.client.types;
     const { capitalize } = message.client.utils;
-    
+
     const command = message.client.commands.get(args[0]) || message.client.aliases.get(args[0]);
     if (
-      command && 
-      (command.type != OWNER || message.client.isOwner(message.member)) && 
+      command &&
+      (command.type != OWNER || message.client.isOwner(message.member)) &&
       !disabledCommands.includes(command.name)
     ) {
-      
+
       embed // Build specific command help embed
         .setTitle(`Command: \`${command.name}\``)
-        .setThumbnail('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso.png')
+        .setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
         .setDescription(command.description)
         .addField('Usage', `\`${prefix}${command.usage}\``, true)
         .addField('Type', `\`${capitalize(command.type)}\``, true)
@@ -85,19 +85,19 @@ module.exports = class HelpCommand extends Command {
       const size = message.client.commands.size - commands[OWNER].length;
 
       embed // Build help embed
-        .setTitle('Calypso\'s Commands')
+        .setTitle('vxn\'s Commands')
         .setDescription(stripIndent`
           **Prefix:** \`${prefix}\`
           **More Information:** \`${prefix}help [command]\`
           ${(!all && size != total) ? `**All Commands:** \`${prefix}help all\`` : ''}
         `)
         .setFooter(
-          (!all && size != total) ? 
-            'Only showing available commands.\n' + message.member.displayName : message.member.displayName, 
+          (!all && size != total) ?
+            'Only showing available commands.\n' + message.member.displayName : message.member.displayName,
           message.author.displayAvatarURL({ dynamic: true })
         )
         .setTimestamp()
-        .setImage('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso_Title.png')
+        .setImage('https://cdn.discordapp.com/attachments/831673153716748318/839805792604913694/300.jpg')
         .setColor(message.guild.me.displayHexColor);
 
       for (const type of Object.values(message.client.types)) {
@@ -107,12 +107,12 @@ module.exports = class HelpCommand extends Command {
       }
 
       embed.addField(
-        '**Links**', 
-        '**[Invite Me](https://discordapp.com/oauth2/authorize?client_id=416451977380364288&scope=bot&permissions=403008599) | ' +
-        '[Support Server](https://discord.gg/pnYVdut) | ' +
-        '[Repository](https://github.com/sabattle/CalypsoBot)**'
+        '**Links**',
+        '**[Invite Me]([Your oauth2 URL]) | ' +
+        '[Support Server]([Your Support Server URL]) | ' +
+        '[Repository]([Your repository URL])**'
       );
-        
+
     }
     message.channel.send(embed);
   }

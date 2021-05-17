@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetWelcomeChannelCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetWelcomeChannelCommand extends Command {
       aliases: ['setwc', 'swc'],
       usage: 'setwelcomechannel <channel mention/ID>',
       description: oneLine`
-        Sets the welcome message text channel for your server. 
+        Sets the welcome message text channel for your server.
         Provide no channel to clear the current \`welcome channel\`.
         A \`welcome message\` must also be set to enable welcome messages.
       `,
@@ -21,7 +21,7 @@ module.exports = class SetWelcomeChannelCommand extends Command {
   }
   run(message, args) {
 
-    let { welcome_channel_id: welcomeChannelId, welcome_message: welcomeMessage } = 
+    let { welcome_channel_id: welcomeChannelId, welcome_message: welcomeMessage } =
       message.client.db.settings.selectWelcomes.get(message.guild.id);
     const oldWelcomeChannel = message.guild.channels.cache.get(welcomeChannelId) || '`None`';
 
@@ -46,8 +46,8 @@ module.exports = class SetWelcomeChannelCommand extends Command {
 
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
-      
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
+
       return message.channel.send(embed
         .spliceFields(0, 0, { name: 'Channel', value: `${oldWelcomeChannel} ➔ \`None\``, inline: true })
         .spliceFields(1, 0, { name: 'Status', value: statusUpdate, inline: true })

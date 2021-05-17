@@ -1,0 +1,38 @@
+{
+	"VIEW_CHANNEL": "Read Text Channels & See Voice Channels",
+	"MANAGE_CHANNELS": "Manage Channels",
+	"MANAGE_ROLES": "Manage Roles",
+	"MANAGE_EMOJIS": "Manage Emojis",
+	"VIEW_AUDIT_LOG": "View Audit Log",
+	"VIEW_GUILD_INSIGHTS": "View Server Insights",
+	"MANAGE_WEBHOOKS": "Manage Webhooks",
+	"MANAGE_GUILD": "Manage Server",
+
+	"CREATE_INSTANT_INVITE": "Create Invite",
+	"CHANGE_NICKNAME": "Change Nickname",
+	"MANAGE_NICKNAMES": "Manage Nicknames",
+	"KICK_MEMBERS": "Kick Members",
+	"BAN_MEMBERS": "Ban Members",
+
+	"SEND_MESSAGES": "Send Messages",
+	"EMBED_LINKS": "Embed Links",
+	"ATTACH_FILES": "Attach Files",
+	"ADD_REACTIONS": "Add Reactions",
+	"USE_EXTERNAL_EMOJIS": "Use External Emojis",
+	"MENTION_EVERYONE": "Mention @everyone, @here, and All Roles",
+	"MANAGE_MESSAGES": "Manage Messages",
+	"READ_MESSAGE_HISTORY": "Read Message History",
+	"SEND_TTS_MESSAGES": "Send TTS Messages",
+	"USE_SLASH_COMMANDS": "Use Slash Commands",
+
+	"CONNECT": "Connect",
+	"SPEAK": "Speak",
+	"STREAM": "Video",
+	"USE_VAD": "Use Voice Activity",
+	"PRIORITY_SPEAKER": "Priority Speaker",
+	"MUTE_MEMBERS": "Mute Members",
+	"DEAFEN_MEMBERS": "Deafen Members",
+	"MOVE_MEMBERS": "Move Members",
+
+	"ADMINISTRATOR": "Administrator"
+}

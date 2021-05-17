@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success, verify } = require('../../utils/emojis.json');
+const { success, verify } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetVerificationRoleCommand extends Command {
@@ -10,9 +10,9 @@ module.exports = class SetVerificationRoleCommand extends Command {
       aliases: ['setvr', 'svr'],
       usage: 'setverificationrole <role mention/ID>',
       description: oneLine`
-        Sets the role Calypso will give members who are verified.
+        Sets the role vxn's minions will give members who are verified.
         Provide no role to clear the current \`verification role\`.
-        A \`verification role\`, a \`verification channel\`, 
+        A \`verification role\`, a \`verification channel\`,
         and a \`verification message\` must be set to enable server verification.
       `,
       type: client.types.ADMIN,
@@ -22,22 +22,22 @@ module.exports = class SetVerificationRoleCommand extends Command {
     });
   }
   async run(message, args) {
-    let { 
-      verification_role_id: verificationRoleId, 
-      verification_channel_id: verificationChannelId, 
+    let {
+      verification_role_id: verificationRoleId,
+      verification_channel_id: verificationChannelId,
       verification_message: verificationMessage,
-      verification_message_id: verificationMessageId 
+      verification_message_id: verificationMessageId
     } = message.client.db.settings.selectVerification.get(message.guild.id);
     const oldVerificationRole = message.guild.roles.cache.get(verificationRoleId) || '`None`';
     const verificationChannel = message.guild.channels.cache.get(verificationChannelId);
-    
+
     // Get status
     const oldStatus = message.client.utils.getStatus(
       verificationRoleId && verificationChannelId && verificationMessage
     );
 
     // Trim message
-    if (verificationMessage && verificationMessage.length > 1024) 
+    if (verificationMessage && verificationMessage.length > 1024)
       verificationMessage = verificationMessage.slice(0, 1021) + '...';
 
     const embed = new MessageEmbed()
@@ -62,10 +62,10 @@ module.exports = class SetVerificationRoleCommand extends Command {
           message.client.logger.error(err);
         }
       }
-      
+
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
 
       return message.channel.send(embed
         .spliceFields(0, 0, { name: 'Role', value: `${oldVerificationRole} ➔ \`None\``, inline: true })

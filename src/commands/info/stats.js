@@ -10,7 +10,7 @@ module.exports = class StatsCommand extends Command {
       name: 'stats',
       aliases: ['statistics', 'metrics'],
       usage: 'stats',
-      description: 'Fetches Calypso\'s statistics.',
+      description: 'Fetches vxn\'s statistics.',
       type: client.types.INFO
     });
   }
@@ -32,21 +32,23 @@ module.exports = class StatsCommand extends Command {
       Cores     :: ${cpu.count()}
       CPU Usage :: ${await cpu.usage()} %
       RAM       :: ${totalMemMb} MB
-      RAM Usage :: ${usedMemMb} MB 
+      RAM Usage :: ${usedMemMb} MB
     `;
     const embed = new MessageEmbed()
-      .setTitle('Calypso\'s Statistics')
+      .setTitle('vxn\'s Statistics')
       .addField('Commands', `\`${message.client.commands.size}\` commands`, true)
       .addField('Aliases', `\`${message.client.aliases.size}\` aliases`, true)
       .addField('Command Types', `\`${Object.keys(message.client.types).length}\` command types`, true)
       .addField('Client', `\`\`\`asciidoc\n${clientStats}\`\`\``)
       .addField('Server', `\`\`\`asciidoc\n${serverStats}\`\`\``)
+      /* vxn 05/17/2021
       .addField(
-        'Links', 
-        '**[Invite Me](https://discordapp.com/oauth2/authorize?client_id=416451977380364288&scope=bot&permissions=403008599) | ' +
-        '[Support Server](https://discord.gg/pnYVdut) | ' +
-        '[Repository](https://github.com/sabattle/CalypsoBot)**'
+        'Links',
+        '**[Invite Me]([Your oauth2 URL]) | ' +
+        '[Support Server]([Your Support Server URL]) | ' +
+        '[Repository]([Your repository URL])**'
       )
+      */
       .setFooter(message.member.displayName,  message.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .setColor(message.guild.me.displayHexColor);

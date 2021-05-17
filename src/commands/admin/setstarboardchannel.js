@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetStarboardChannelCommand extends Command {
@@ -37,8 +37,8 @@ module.exports = class SetStarboardChannelCommand extends Command {
 
     const starboardChannel = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
     if (
-      !starboardChannel || 
-      (starboardChannel.type != 'text' && starboardChannel.type != 'news') || 
+      !starboardChannel ||
+      (starboardChannel.type != 'text' && starboardChannel.type != 'news') ||
       !starboardChannel.viewable
     ) {
       return this.sendErrorMessage(message, 0, stripIndent`

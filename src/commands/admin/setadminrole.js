@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 
 module.exports = class SetAdminRoleCommand extends Command {
   constructor(client) {

@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine } = require('common-tags');
 
 module.exports = class SetWelcomeMessageCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetWelcomeMessageCommand extends Command {
       aliases: ['setwelcomemsg', 'setwm', 'swm'],
       usage: 'setwelcomemessage <message>',
       description: oneLine`
-        Sets the message Calypso will say when someone joins your server.
+        Sets the message vxn's minions will say when someone joins your server.
         You may use \`?member\` to substitute for a user mention,
         \`?username\` to substitute for someone's username,
         \`?tag\` to substitute for someone's full Discord tag (username + discriminator),
@@ -25,7 +25,7 @@ module.exports = class SetWelcomeMessageCommand extends Command {
   }
   run(message, args) {
 
-    const { welcome_channel_id: welcomeChannelId, welcome_message: oldWelcomeMessage } = 
+    const { welcome_channel_id: welcomeChannelId, welcome_message: oldWelcomeMessage } =
       message.client.db.settings.selectWelcomes.get(message.guild.id);
     let welcomeChannel = message.guild.channels.cache.get(welcomeChannelId);
 
@@ -46,14 +46,14 @@ module.exports = class SetWelcomeMessageCommand extends Command {
 
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
 
       return message.channel.send(embed
         .addField('Status', statusUpdate, true)
         .addField('Message', '`None`')
       );
     }
-    
+
     let welcomeMessage = message.content.slice(message.content.indexOf(args[0]), message.content.length);
     message.client.db.settings.updateWelcomeMessage.run(welcomeMessage, message.guild.id);
     if (welcomeMessage.length > 1024) welcomeMessage = welcomeMessage.slice(0, 1021) + '...';

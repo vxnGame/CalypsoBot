@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success, verify } = require('../../utils/emojis.json');
+const { success, verify } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetVerificationChannelCommand extends Command {
@@ -13,7 +13,7 @@ module.exports = class SetVerificationChannelCommand extends Command {
         Sets the verification text channel for your server. If set, unverified members will start here.
         Once verified, the \`verification role\` will be assigned to them.
         Please ensure that new members are not able access other server channels for proper verification.
-        A \`verification channel\`, a \`verification message\`, 
+        A \`verification channel\`, a \`verification message\`,
         and an \`verification role\` must be set to enable server verification.
       `,
       type: client.types.ADMIN,
@@ -24,11 +24,11 @@ module.exports = class SetVerificationChannelCommand extends Command {
   }
   async run(message, args) {
 
-    let { 
+    let {
       verification_role_id: verificationRoleId,
-      verification_channel_id: verificationChannelId, 
+      verification_channel_id: verificationChannelId,
       verification_message: verificationMessage,
-      verification_message_id: verificationMessageId 
+      verification_message_id: verificationMessageId
     } = message.client.db.settings.selectVerification.get(message.guild.id);
     const verificationRole = message.guild.roles.cache.get(verificationRoleId);
     const oldVerificationChannel = message.guild.channels.cache.get(verificationChannelId) || '`None`';
@@ -39,9 +39,9 @@ module.exports = class SetVerificationChannelCommand extends Command {
     );
 
     // Trim message
-    if (verificationMessage && verificationMessage.length > 1024) 
+    if (verificationMessage && verificationMessage.length > 1024)
       verificationMessage = verificationMessage.slice(0, 1021) + '...';
-    
+
     const embed = new MessageEmbed()
       .setTitle('Settings: `Verification`')
       .setDescription(`The \`verification channel\` was successfully updated. ${success}`)
@@ -67,15 +67,15 @@ module.exports = class SetVerificationChannelCommand extends Command {
 
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
-      
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
+
       return message.channel.send(embed
         .spliceFields(1, 0, { name: 'Channel', value: `${oldVerificationChannel} ➔ \`None\``, inline: true })
         .spliceFields(2, 0, { name: 'Status', value: statusUpdate, inline: true })
       );
     }
 
-    const verificationChannel = 
+    const verificationChannel =
       this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
     if (!verificationChannel || verificationChannel.type != 'text' || !verificationChannel.viewable)
       return this.sendErrorMessage(message, 0, stripIndent`
@@ -88,9 +88,9 @@ module.exports = class SetVerificationChannelCommand extends Command {
 
     message.client.db.settings.updateVerificationChannelId.run(verificationChannel.id, message.guild.id);
     message.channel.send(embed
-      .spliceFields(1, 0, { 
-        name: 'Channel', 
-        value: `${oldVerificationChannel} ➔ ${verificationChannel}`, 
+      .spliceFields(1, 0, {
+        name: 'Channel',
+        value: `${oldVerificationChannel} ➔ ${verificationChannel}`,
         inline: true
       })
       .spliceFields(2, 0, { name: 'Status', value: statusUpdate, inline: true})

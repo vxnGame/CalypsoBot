@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine } = require('common-tags');
 
 module.exports = class SetAutoKickCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetAutoKickCommand extends Command {
       aliases: ['setak', 'sak'],
       usage: 'setautokick <warn count>',
       description: oneLine`
-        Sets the amount of warns needed before Calypso will automatically kick someone from your server.
+        Sets the amount of warns needed before vxn's minions will automatically kick someone from your server.
         Provide no warn count or a warn count of 0 to disable \`auto kick\`.
       `,
       type: client.types.ADMIN,
@@ -22,9 +22,9 @@ module.exports = class SetAutoKickCommand extends Command {
 
     const autoKick = message.client.db.settings.selectAutoKick.pluck().get(message.guild.id) || 'disabled';
     const amount = args[0];
-    if (amount && (!Number.isInteger(Number(amount)) || amount < 0)) 
+    if (amount && (!Number.isInteger(Number(amount)) || amount < 0))
       return this.sendErrorMessage(message, 0, 'Please enter a positive integer');
-      
+
     const embed = new MessageEmbed()
       .setTitle('Settings: `System`')
       .setThumbnail(message.guild.iconURL({ dynamic: true }))

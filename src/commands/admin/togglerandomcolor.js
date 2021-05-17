@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success, fail } = require('../../utils/emojis.json');
+const { success, fail } = require('../../../data/text/emojis.json');
 
 module.exports = class ToggleRandomColorCommand extends Command {
   constructor(client) {
@@ -23,9 +23,9 @@ module.exports = class ToggleRandomColorCommand extends Command {
       description = `\`Random color\` has been successfully **enabled**. ${success}`;
     } else {
       status = '`enabled` 🡪 `disabled`';
-      description = `\`Random color\` has been successfully **disabled**. ${fail}`;   
-    } 
-    
+      description = `\`Random color\` has been successfully **disabled**. ${fail}`;
+    }
+
     const embed = new MessageEmbed()
       .setTitle('Settings: `System`')
       .setThumbnail(message.guild.iconURL())

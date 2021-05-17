@@ -8,21 +8,21 @@ module.exports = class GitHubCommand extends Command {
       name: 'github',
       aliases: ['gh', 'repo'],
       usage: 'github',
-      description: 'Displays the link to Calypso\'s GitHub repository.',
+      description: 'Displays the link to vxn\'s GitHub repository.',
       type: client.types.INFO
     });
   }
   run(message) {
     const embed = new MessageEmbed()
       .setTitle('GitHub Link')
-      .setThumbnail('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso.png')
+      .setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
       .setDescription(oneLine`
-        Click [here](https://github.com/sabattle/CalypsoBot) to to visit my GitHub repository!
+        Click [here]([Your repository URL]) to to visit my GitHub repository!
         Please support me by starring ⭐ the repo, and feel free to comment about issues or suggestions!
       `)
       .addField('Other Links',
-        '**[Invite Me](https://discordapp.com/oauth2/authorize?client_id=416451977380364288&scope=bot&permissions=403008599) | ' +
-        '[Support Server](https://discord.gg/pnYVdut)**'
+        '**[Invite Me]([Your oauth2 URL]) | ' +
+        '[Support Server]([Your Support Server URL])**'
       )
       .setFooter(message.member.displayName,  message.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp()

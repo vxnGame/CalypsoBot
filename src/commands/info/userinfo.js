@@ -1,7 +1,7 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
-const emojis = require('../../utils/emojis.json');
+const emojis = require('../../../data/text/emojis.json');
 const statuses = {
   online: `${emojis.online} \`Online\``,
   idle: `${emojis.idle} \`AFK\``,
@@ -36,8 +36,8 @@ module.exports = class UserInfoCommand extends Command {
     });
   }
   async run(message, args) {
-    const member =  this.getMemberFromMention(message, args[0]) || 
-      message.guild.members.cache.get(args[0]) || 
+    const member =  this.getMemberFromMention(message, args[0]) ||
+      message.guild.members.cache.get(args[0]) ||
       message.member;
     const userFlags = (await member.user.fetchFlags()).toArray();
     const activities = [];
@@ -62,12 +62,12 @@ module.exports = class UserInfoCommand extends Command {
           break;
       }
     }
-    
+
     // Trim roles
     let roles = message.client.utils.trimArray(member.roles.cache.array().filter(r => !r.name.startsWith('#')));
     roles = message.client.utils.removeElement(roles, message.guild.roles.everyone)
       .sort((a, b) => b.position - a.position).join(' ');
-    
+
     const embed = new MessageEmbed()
       .setTitle(`${member.displayName}'s Information`)
       .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))

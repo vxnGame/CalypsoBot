@@ -1,5 +1,5 @@
 {
-  "name": "calypso",
+  "name": "dcb-discord-js--vm-cb",
   "version": "1.7.0",
   "description": "A fully customizable bot built with discord.js",
   "main": "app.js",
@@ -27,12 +27,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://sabattle@github.com/sabattle/CalypsoBot.git"
+    "url": "git+https://github.com/vxnGame/CalypsoBot.git"
   },
   "author": "Sebastian Battle",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/sabattle/CalypsoBot/issues"
+    "url": "https://github.com/vxnGame/CalypsoBot/issues"
   },
-  "homepage": "https://github.com/sabattle/CalypsoBot#readme"
+  "homepage": "https://github.com/vxnGame/CalypsoBot#readme"
 }

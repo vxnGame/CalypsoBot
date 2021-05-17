@@ -2,10 +2,10 @@ const Discord = require('discord.js');
 const { readdir, readdirSync } = require('fs');
 const { join, resolve } = require('path');
 const AsciiTable = require('ascii-table');
-const { fail } = require('./utils/emojis.json');
+const { fail } = require('../data/text/emojis.json');
 
 /**
- * Calypso's custom client
+ * vxn's minions custom client
  * @extends Discord.Client
  */
 class Client extends Discord.Client {
@@ -27,7 +27,7 @@ class Client extends Discord.Client {
 		/**
      * Create database
      */
-		this.db = require('./utils/db.js');
+	this.db = require('./utils/db.js');
 
 		/**
      * All possible command types
@@ -75,25 +75,25 @@ class Client extends Discord.Client {
 		this.apiKeys = config.apiKeys;
 
 		/**
-     * Calypso's owner ID
+     * vxn's minions owner ID
      * @type {string}
      */
 		this.ownerId = config.ownerId;
 
 		/**
-     * Calypso's bug report channel ID
+     * vxn's minions bug report channel ID
      * @type {string}
      */
 		this.bugReportChannelId = config.bugReportChannelId;
 
 		/**
-     * Calypso's feedback channel ID
+     * vxn's minions feedback channel ID
      * @type {string}
      */
 		this.feedbackChannelId = config.feedbackChannelId;
 
 		/**
-     * Calypso's server log channel ID
+     * vxn's minions server log channel ID
      * @type {string}
      */
 		this.serverLogId = config.serverLogId;

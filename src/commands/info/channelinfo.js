@@ -1,7 +1,7 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
-const { voice } = require('../../utils/emojis.json');
+const { voice } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 const channelTypes = {
   dm: 'DM',
@@ -19,7 +19,7 @@ module.exports = class ChannelInfoCommand extends Command {
       aliases: ['channel', 'ci'],
       usage: 'channelinfo [channel mention/ID]',
       description: oneLine`
-        Fetches information about the provided channel. 
+        Fetches information about the provided channel.
         If no channel is given, the current channel will be used.
       `,
       type: client.types.INFO,
@@ -56,7 +56,7 @@ module.exports = class ChannelInfoCommand extends Command {
         .spliceFields(5, 0, { name: 'User Limit', value: `\`${channel.userLimit}\``, inline: true })
         .spliceFields(6, 0, { name: 'Full', value: `\`${channel.full}\``, inline: true });
       const members = channel.members.array();
-      if (members.length > 0) 
+      if (members.length > 0)
         embed.addField('Members Joined', message.client.utils.trimArray(channel.members.array()).join(' '));
     } else return this.sendErrorMessage(message, 0, stripIndent`
       Please enter mention a valid text or announcement channel` +

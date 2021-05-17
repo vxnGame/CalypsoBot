@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success, fail } = require('../../utils/emojis.json');
+const { success, fail } = require('../../../data/text/emojis.json');
 const { oneLine } = require('common-tags');
 
 module.exports = class ToggleCommandCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class ToggleCommandCommand extends Command {
       aliases: ['togglec', 'togc', 'tc'],
       usage: 'togglecommand <command>',
       description: oneLine`
-        Enables or disables the provided command. 
+        Enables or disables the provided command.
         Disabled commands will no longer be able to be used, and will no longer show up with the \`help\` command.
         \`${client.utils.capitalize(client.types.ADMIN)}\` commands cannot be disabled.
       `,
@@ -24,12 +24,12 @@ module.exports = class ToggleCommandCommand extends Command {
     const { ADMIN, OWNER } = message.client.types;
 
     const command = message.client.commands.get(args[0]) || message.client.aliases.get(args[0]);
-    if (!command || (command && command.type == OWNER)) 
+    if (!command || (command && command.type == OWNER))
       return this.sendErrorMessage(message, 0, 'Please provide a valid command');
 
     const { capitalize } = message.client.utils;
 
-    if (command.type === ADMIN) 
+    if (command.type === ADMIN)
       return this.sendErrorMessage(message, 0, `${capitalize(ADMIN)} commands cannot be disabled`);
 
     let disabledCommands = message.client.db.settings.selectDisabledCommands.pluck().get(message.guild.id) || [];
@@ -41,7 +41,7 @@ module.exports = class ToggleCommandCommand extends Command {
     if (!disabledCommands.includes(command.name)) {
       disabledCommands.push(command.name); // Add to array if not present
       description = `The \`${command.name}\` command has been successfully **disabled**. ${fail}`;
-    
+
     // Enable command
     } else {
       message.client.utils.removeElement(disabledCommands, command.name);

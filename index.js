@@ -4,7 +4,7 @@ http.createServer(function(req, res) {
 	res.write('System online');
 	res.end();
 }).listen(8080);
-// ================= END Web CODE ===================
+// ================= START BOT CODE ===================
 const config = require('./config');
 const Client = require('./src/Client.js');
 const { Intents } = require('discord.js');
@@ -28,7 +28,7 @@ function init() {
 	client.loadEvents('./src/events');
 	client.loadCommands('./src/commands');
 	client.loadTopics('./data/trivia');
-	client.login(client.token);
+	client.login(client.DISCORD_BOT_TOKEN);
 }
 
 init();

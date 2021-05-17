@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 
 module.exports = class SetVoicePointsVoice extends Command {
   constructor(client) {
@@ -16,13 +16,13 @@ module.exports = class SetVoicePointsVoice extends Command {
   }
   run(message, args) {
     const amount = args[0];
-    if (!amount || !Number.isInteger(Number(amount)) || amount < 0) 
+    if (!amount || !Number.isInteger(Number(amount)) || amount < 0)
       return this.sendErrorMessage(message, 0, 'Please enter a positive integer');
-    const { 
-      point_tracking: pointTracking, 
-      message_points: messagePoints, 
+    const {
+      point_tracking: pointTracking,
+      message_points: messagePoints,
       command_points: commandPoints,
-      voice_points: voicePoints 
+      voice_points: voicePoints
     } = message.client.db.settings.selectPoints.get(message.guild.id);
     const status = message.client.utils.getStatus(pointTracking);
     message.client.db.settings.updateVoicePoints.run(amount, message.guild.id);

@@ -8,7 +8,7 @@ module.exports = class ExplainPointsCommand extends Command {
       name: 'explainpoints',
       aliases: ['explainp', 'ep', 'howtopoints', 'h2points'],
       usage: 'explainpoints',
-      description: 'Explains the various aspects about Calypso\'s points and crown systems.',
+      description: 'Explains the various aspects about vxn\'s points and crown systems.',
       type: client.types.POINTS
     });
   }
@@ -19,16 +19,16 @@ module.exports = class ExplainPointsCommand extends Command {
     if (typeof(disabledCommands) === 'string') disabledCommands = disabledCommands.split(' ');
 
     const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id); // Get prefix
-    const { message_points: messagePoints, command_points: commandPoints, voice_points: voicePoints } 
+    const { message_points: messagePoints, command_points: commandPoints, voice_points: voicePoints }
       = message.client.db.settings.selectPoints.get(message.guild.id);
 
     // Points per
-    let earningPoints = 
+    let earningPoints =
       stripIndent`You can earn points in the following ways: by sending **messages**, by using **commands**,` +
       ' and by spending time in **voice chat**.';
-    if (!disabledCommands.includes('givepoints')) earningPoints += 
+    if (!disabledCommands.includes('givepoints')) earningPoints +=
       ` And if someone's feeling generous, they can give you points by using the \`${prefix}givepoints\` command.`;
-    
+
     const pointsPer = stripIndent`
       Message Points :: ${messagePoints} per message
       Command Points :: ${commandPoints} per command
@@ -36,7 +36,7 @@ module.exports = class ExplainPointsCommand extends Command {
     `;
 
     earningPoints += ` Here is this server's **points per action**:\n\`\`\`asciidoc\n${pointsPer}\`\`\``;
- 
+
     if (!disabledCommands.includes('pointsper'))
       earningPoints += `
         To quickly see your server's points per action again, you may use the command \`${prefix}pointsper\`.
@@ -47,7 +47,7 @@ module.exports = class ExplainPointsCommand extends Command {
 
     if (!disabledCommands.includes('points'))
       checkingPoints += `\nTo see current points, use the \`${prefix}points\` command.`;
-    
+
     if (!disabledCommands.includes('totalpoints'))
       checkingPoints += ` To see overall points, use the \`${prefix}totalpoints\` command.`;
 
@@ -56,10 +56,10 @@ module.exports = class ExplainPointsCommand extends Command {
 
     if (!disabledCommands.includes('position'))
       leaderboard += ` To check leaderboard standing, use the \`${prefix}position\` command.`;
-      
+
     if (!disabledCommands.includes('leaderboard'))
       leaderboard += ` To see the leaderboard itself, use the \`${prefix}leaderboard\` command.`;
-    
+
     // The Crown
     let crown = stripIndent`
       If a \`crown role\` and \`crown schedule\` are set, then the person with the most points that cycle will win!` +

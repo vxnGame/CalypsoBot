@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetMessageEditLogCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetMessageEditLogCommand extends Command {
       aliases: ['setmsgeditlog', 'setmel', 'smel'],
       usage: 'setmessageeditlog <channel mention/ID>',
       description: oneLine`
-        Sets the message edit log text channel for your server. 
+        Sets the message edit log text channel for your server.
         Provide no channel to clear the current \`message edit log\`.
       `,
       type: client.types.ADMIN,
@@ -36,7 +36,7 @@ module.exports = class SetMessageEditLogCommand extends Command {
     }
 
     const messageEditLog = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
-    if (!messageEditLog || messageEditLog.type != 'text' || !messageEditLog.viewable) 
+    if (!messageEditLog || messageEditLog.type != 'text' || !messageEditLog.viewable)
       return this.sendErrorMessage(message, 0, stripIndent`
         Please mention an accessible text channel or provide a valid text channel ID
       `);

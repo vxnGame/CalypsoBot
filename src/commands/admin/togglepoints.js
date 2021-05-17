@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success, fail } = require('../../utils/emojis.json');
+const { success, fail } = require('../../../data/text/emojis.json');
 
 module.exports = class TogglePointsCommand extends Command {
   constructor(client) {
@@ -8,17 +8,17 @@ module.exports = class TogglePointsCommand extends Command {
       name: 'togglepoints',
       aliases: ['togglep', 'togp'],
       usage: 'togglepoints',
-      description: 'Enables or disables Calypso\'s point tracking.',
+      description: 'Enables or disables vxn\'s point tracking.',
       type: client.types.ADMIN,
       userPermissions: ['MANAGE_GUILD']
     });
   }
   run(message) {
-    let { 
-      point_tracking: pointTracking, 
-      message_points: messagePoints, 
+    let {
+      point_tracking: pointTracking,
+      message_points: messagePoints,
       command_points: commandPoints,
-      voice_points: voicePoints 
+      voice_points: voicePoints
     } = message.client.db.settings.selectPoints.get(message.guild.id);
     pointTracking = 1 - pointTracking; // Invert
     message.client.db.settings.updatePointTracking.run(pointTracking, message.guild.id);
@@ -29,9 +29,9 @@ module.exports = class TogglePointsCommand extends Command {
       description = `\`Points\` have been successfully **enabled**. ${success}`;
     } else {
       status = '`enabled` 🡪 `disabled`';
-      description = `\`Points\` have been successfully **disabled**. ${fail}`;   
-    } 
-    
+      description = `\`Points\` have been successfully **disabled**. ${fail}`;
+    }
+
     const embed = new MessageEmbed()
       .setTitle('Settings: `Points`')
       .setThumbnail(message.guild.iconURL())

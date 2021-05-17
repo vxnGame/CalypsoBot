@@ -1,20 +1,20 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { pong } = require('../../utils/emojis.json');
+const { pong } = require('../../../data/text/emojis.json');
 
 module.exports = class PingCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'ping',
       usage: 'ping',
-      description: 'Gets Calypso\'s current latency and API latency.',
+      description: 'Gets vxn\'s current latency and API latency.',
       type: client.types.INFO
     });
   }
   async run(message) {
     const embed = new MessageEmbed()
       .setDescription('`Pinging...`')
-      .setColor(message.guild.me.displayHexColor);    
+      .setColor(message.guild.me.displayHexColor);
     const msg = await message.channel.send(embed);
     const timestamp = (message.editedTimestamp) ? message.editedTimestamp : message.createdTimestamp; // Check if edited
     const latency = `\`\`\`ini\n[ ${Math.floor(msg.createdTimestamp - timestamp)}ms ]\`\`\``;

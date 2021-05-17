@@ -1,7 +1,7 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
 const parser = require('cron-parser');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { stripIndent } = require('common-tags');
 
 module.exports = class SetCrownScheduleCommand extends Command {
@@ -11,7 +11,7 @@ module.exports = class SetCrownScheduleCommand extends Command {
       aliases: ['setcs', 'scs'],
       usage: 'setcrownschedule <cron>',
       description: stripIndent`
-        Sets the schedule for Calypso's crown role rotation. 
+        Sets the schedule for vxn's minions crown role rotation.
         The format is cron-style:
         \`\`\`*    *    *    *    *
         ┬    ┬    ┬    ┬    ┬
@@ -24,7 +24,7 @@ module.exports = class SetCrownScheduleCommand extends Command {
         If you wish to use multiple values for any of the categories, please separate them with \`,\`.` +
         ' Step syntax is also supported, for example: `0 */1 * * *` (every hour). ' +
         'For the day of the week, both 0 and 7 may represent Sunday. ' +
-        'If you need additional help building your cron, please check out this website: <https://crontab.guru/#>. ' + 
+        'If you need additional help building your cron, please check out this website: <https://crontab.guru/#>. ' +
         `Enter no schedule to clear the current \`crown schedule\`.
         A \`crown role\` must also be set to enable role rotation.
         **Please Note:** To prevent potential Discord API abuse, minutes and seconds will always be set to \`0\`.`,
@@ -34,11 +34,11 @@ module.exports = class SetCrownScheduleCommand extends Command {
     });
   }
   run(message, args) {
-    let { 
-      crown_role_id: crownRoleId, 
-      crown_channel_id: crownChannelId, 
-      crown_message: crownMessage, 
-      crown_schedule: oldCrownSchedule 
+    let {
+      crown_role_id: crownRoleId,
+      crown_channel_id: crownChannelId,
+      crown_message: crownMessage,
+      crown_schedule: oldCrownSchedule
     } = message.client.db.settings.selectCrown.get(message.guild.id);
     const crownRole = message.guild.roles.cache.get(crownRoleId);
     const crownChannel = message.guild.channels.cache.get(crownChannelId);
@@ -67,11 +67,11 @@ module.exports = class SetCrownScheduleCommand extends Command {
       if (message.guild.job) message.guild.job.cancel(); // Cancel old job
 
       message.client.logger.info(`${message.guild.name}: Cancelled job`);
-      
+
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
-      
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
+
       return message.channel.send(embed
         .spliceFields(2, 0, { name: 'Schedule', value: `\`${oldCrownSchedule || 'None'}\` ➔ \`None\``, inline: true })
         .spliceFields(3, 0, { name: 'Status', value: statusUpdate })
@@ -96,7 +96,7 @@ module.exports = class SetCrownScheduleCommand extends Command {
         description = description.slice(0, -1) + `, and seconds were changed from \`${cron[5]}\` to \`0\`.`;
       else description = description + `\n**Note:** Seconds were changed from \`${cron[5]}\` to \`0\`.`;
       cron[5] = '0';
-    } 
+    }
     crownSchedule = cron.join(' ');
     embed.setDescription(description);
 
@@ -111,10 +111,10 @@ module.exports = class SetCrownScheduleCommand extends Command {
     const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
 
     message.channel.send(embed
-      .spliceFields(2, 0, { 
-        name: 'Schedule', 
-        value: `\`${oldCrownSchedule || 'None'}\` ➔ \`${crownSchedule}\``, 
-        inline: true 
+      .spliceFields(2, 0, {
+        name: 'Schedule',
+        value: `\`${oldCrownSchedule || 'None'}\` ➔ \`${crownSchedule}\``,
+        inline: true
       })
       .spliceFields(3, 0, { name: 'Status', value: statusUpdate })
     );

@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine } = require('common-tags');
 
 module.exports = class SetCrownMessageCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetCrownMessageCommand extends Command {
       aliases: ['setcrownmsg', 'setcm', 'scm'],
       usage: 'setcrownmessage <message>',
       description: oneLine`
-        Sets the message Calypso will say during the crown role rotation.
+        Sets the message vxn's minions will say during the crown role rotation.
         You may use \`?member\` to substitute for a user mention ,
         \`?username\` to substitute for someone's username,
         \`?tag\` to substitute for someone's full Discord tag (username + discriminator),
@@ -25,10 +25,10 @@ module.exports = class SetCrownMessageCommand extends Command {
     });
   }
   run(message, args) {
-    const { 
-      crown_role_id: crownRoleId, 
-      crown_channel_id: crownChannelId, 
-      crown_schedule: crownSchedule 
+    const {
+      crown_role_id: crownRoleId,
+      crown_channel_id: crownChannelId,
+      crown_schedule: crownSchedule
     } = message.client.db.settings.selectCrown.get(message.guild.id);
     const crownRole = message.guild.roles.cache.get(crownRoleId);
     const crownChannel = message.guild.channels.cache.get(crownChannelId);

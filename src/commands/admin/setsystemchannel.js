@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetSystemChannelCommand extends Command {
@@ -10,9 +10,9 @@ module.exports = class SetSystemChannelCommand extends Command {
       aliases: ['setsc', 'ssc'],
       usage: 'setsystemchannel <channel mention/ID>',
       description: oneLine`
-        Sets the system text channel for your server. This is where Calypso's system messages will be sent. 
-        Provide no channel to clear the current \`system channel\`. Clearing this setting is **not recommended** 
-        as Calypso requires a \`system channel\` to notify you about important errors.
+        Sets the system text channel for your server. This is where vxn's minions system messages will be sent.
+        Provide no channel to clear the current \`system channel\`. Clearing this setting is **not recommended**
+        as vxn's minions requires a \`system channel\` to notify you about important errors.
       `,
       type: client.types.ADMIN,
       userPermissions: ['MANAGE_GUILD'],

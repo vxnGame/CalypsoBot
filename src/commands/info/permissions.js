@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const permissions = require('../../utils/permissions.json');
+const permissions = require('../../../data/text/permissions.json');
 const { oneLine } = require('common-tags');
 
 module.exports = class PermissionsCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class PermissionsCommand extends Command {
       aliases: ['perms'],
       usage: 'permissions [user mention/ID]',
       description: oneLine`
-        Displays all current permissions for the specified user. 
+        Displays all current permissions for the specified user.
         If no user is given, your own permissions will be displayed.
       `,
       type: client.types.INFO,
@@ -18,8 +18,8 @@ module.exports = class PermissionsCommand extends Command {
     });
   }
   run(message, args) {
-    const member =  this.getMemberFromMention(message, args[0]) || 
-      message.guild.members.cache.get(args[0]) || 
+    const member =  this.getMemberFromMention(message, args[0]) ||
+      message.guild.members.cache.get(args[0]) ||
       message.member;
 
     // Get member permissions

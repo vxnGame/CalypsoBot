@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine } = require('common-tags');
 
 module.exports = class SetCrownRoleCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetCrownRoleCommand extends Command {
       aliases: ['setcr', 'scr'],
       usage: 'setcrownrole <role mention/ID>',
       description: oneLine`
-        Sets the role Calypso will give to the member with the most points each cycle.
+        Sets the role vxn's minions will give to the member with the most points each cycle.
         Provide no role to clear the current \`crown role\`.
         A \`crown schedule\` must also be set to enable role rotation.
       `,
@@ -20,11 +20,11 @@ module.exports = class SetCrownRoleCommand extends Command {
     });
   }
   run(message, args) {
-    let { 
-      crown_role_id: crownRoleId, 
-      crown_channel_id: crownChannelId, 
-      crown_message: crownMessage, 
-      crown_schedule: crownSchedule 
+    let {
+      crown_role_id: crownRoleId,
+      crown_channel_id: crownChannelId,
+      crown_message: crownMessage,
+      crown_schedule: crownSchedule
     } = message.client.db.settings.selectCrown.get(message.guild.id);
     const oldCrownRole = message.guild.roles.cache.get(crownRoleId) || '`None`';
     const crownChannel = message.guild.channels.cache.get(crownChannelId);
@@ -52,10 +52,10 @@ module.exports = class SetCrownRoleCommand extends Command {
       if (message.guild.job) message.guild.job.cancel(); // Cancel old job
 
       message.client.logger.info(`${message.guild.name}: Cancelled job`);
-      
+
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
 
       return message.channel.send(embed
         .spliceFields(0, 0, { name: 'Role', value: `${oldCrownRole} ➔ \`None\``, inline: true })

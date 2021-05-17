@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const colors = require('../../utils/colors.json');
+const colors = require('../../../data/text/colors.json');
 const len = Object.keys(colors).length;
 const { oneLine } = require('common-tags');
 
@@ -11,7 +11,7 @@ module.exports = class CreateDefaultColorsCommand extends Command {
       aliases: ['cdc'],
       usage: 'createdefaultcolors',
       description: oneLine`
-        Generates the ${len} default color roles that come with packaged with Calypso on your server. 
+        Generates the ${len} default color roles that come with packaged with vxn's minions on your server.
         Color roles are denoted by the prefix \`#\`.
       `,
       type: client.types.COLOR,
@@ -47,7 +47,7 @@ module.exports = class CreateDefaultColorsCommand extends Command {
         } catch (err) {
           message.client.logger.error(err.message);
         }
-      } 
+      }
     }
     const fails = len - colorList.length;
     embed // Build embed

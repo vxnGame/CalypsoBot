@@ -1,9 +1,9 @@
 const { MessageEmbed } = require('discord.js');
-const permissions = require('../utils/permissions.json');
-const { fail } = require('../utils/emojis.json');
+const permissions = require('../../data/text/permissions.json');
+const { fail } = require('../../data/text/emojis.json');
 
 /**
- * Calypso's custom Command class
+ * vxn's minions custom Command class
  */
 class Command {
 

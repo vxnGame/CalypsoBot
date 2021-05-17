@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success, verify } = require('../../utils/emojis.json');
+const { success, verify } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetVerificationMessageCommand extends Command {
@@ -10,9 +10,9 @@ module.exports = class SetVerificationMessageCommand extends Command {
       aliases: ['setverificationmsg', 'setvm', 'svm'],
       usage: 'setverificationmessage <message>',
       description: oneLine`
-        Sets the message Calypso will post in the \`verification channel\`.
+        Sets the message vxn's minions will post in the \`verification channel\`.
         Enter no message to clear the verification message.
-        A \`verification role\`, a \`verification channel\`, 
+        A \`verification role\`, a \`verification channel\`,
         and a \`verification message\` must be set to enable server verification.
       `,
       type: client.types.ADMIN,
@@ -23,11 +23,11 @@ module.exports = class SetVerificationMessageCommand extends Command {
   }
   async run(message, args) {
 
-    let { 
+    let {
       verification_role_id: verificationRoleId,
-      verification_channel_id: verificationChannelId, 
+      verification_channel_id: verificationChannelId,
       verification_message: oldVerificationMessage,
-      verification_message_id: verificationMessageId 
+      verification_message_id: verificationMessageId
     } = message.client.db.settings.selectVerification.get(message.guild.id);
     const verificationRole = message.guild.roles.cache.get(verificationRoleId);
     const verificationChannel = message.guild.channels.cache.get(verificationChannelId);
@@ -61,14 +61,14 @@ module.exports = class SetVerificationMessageCommand extends Command {
 
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
 
       return message.channel.send(embed
         .addField('Status', statusUpdate, true)
         .addField('Message', '`None`')
       );
     }
-    
+
     let verificationMessage = message.content.slice(message.content.indexOf(args[0]), message.content.length);
     message.client.db.settings.updateVerificationMessage.run(verificationMessage, message.guild.id);
     if (verificationMessage.length > 1024) verificationMessage = verificationMessage.slice(0, 1021) + '...';

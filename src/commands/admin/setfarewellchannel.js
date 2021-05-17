@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetFarewellChannelCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetFarewellChannelCommand extends Command {
       aliases: ['setfc', 'sfc'],
       usage: 'setfarewellchannel <channel mention/ID>',
       description: oneLine`
-        Sets the farewell message text channel for your server. 
+        Sets the farewell message text channel for your server.
         Provide no channel to clear the current \`farewell channel\`.
         A \`farewell message\` must also be set to enable farewell messages.
       `,
@@ -20,7 +20,7 @@ module.exports = class SetFarewellChannelCommand extends Command {
     });
   }
   run(message, args) {
-    let { farewell_channel_id: farewellChannelId, farewell_message: farewellMessage } = 
+    let { farewell_channel_id: farewellChannelId, farewell_message: farewellMessage } =
       message.client.db.settings.selectFarewells.get(message.guild.id);
     const oldFarewellChannel = message.guild.channels.cache.get(farewellChannelId) || '`None`';
 
@@ -29,7 +29,7 @@ module.exports = class SetFarewellChannelCommand extends Command {
 
     // Trim message
     if (farewellMessage && farewellMessage.length > 1024) farewellMessage = farewellMessage.slice(0, 1021) + '...';
-    
+
     const embed = new MessageEmbed()
       .setTitle('Settings: `Farewells`')
       .setDescription(`The \`farewell channel\` was successfully updated. ${success}`)
@@ -45,8 +45,8 @@ module.exports = class SetFarewellChannelCommand extends Command {
 
       // Update status
       const status = 'disabled';
-      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``; 
-      
+      const statusUpdate = (oldStatus != status) ? `\`${oldStatus}\` ➔ \`${status}\`` : `\`${oldStatus}\``;
+
       return message.channel.send(embed
         .spliceFields(0, 0, { name: 'Channel', value: `${oldFarewellChannel} ➔ \`None\``, inline: true })
         .spliceFields(1, 0, { name: 'Status', value: statusUpdate, inline: true })
@@ -54,7 +54,7 @@ module.exports = class SetFarewellChannelCommand extends Command {
     }
 
     const farewellChannel = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
-    if (!farewellChannel || (farewellChannel.type != 'text' && farewellChannel.type != 'news') || !farewellChannel.viewable) 
+    if (!farewellChannel || (farewellChannel.type != 'text' && farewellChannel.type != 'news') || !farewellChannel.viewable)
       return this.sendErrorMessage(message, 0, stripIndent`
         Please mention an accessible text or announcement channel or provide a valid text or announcement channel ID
       `);

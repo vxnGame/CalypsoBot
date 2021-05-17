@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 
 module.exports = class SetPrefixCommand extends Command {
   constructor(client) {
@@ -18,7 +18,7 @@ module.exports = class SetPrefixCommand extends Command {
     const oldPrefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
     const prefix = args[0];
     if (!prefix) return this.sendErrorMessage(message, 0, 'Please provide a prefix');
-    else if (prefix.length > 3) 
+    else if (prefix.length > 3)
       return this.sendErrorMessage(message, 0, 'Please ensure the prefix is no larger than 3 characters');
     message.client.db.settings.updatePrefix.run(prefix, message.guild.id);
     const embed = new MessageEmbed()

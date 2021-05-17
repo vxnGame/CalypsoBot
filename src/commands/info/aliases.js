@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const emojis = require('../../utils/emojis.json');
+const emojis = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class AliasesCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class AliasesCommand extends Command {
       aliases: ['alias', 'ali', 'a'],
       usage: 'aliases [command type]',
       description: oneLine`
-        Displays a list of all current aliases for the given command type. 
+        Displays a list of all current aliases for the given command type.
         If no command type is given, the amount of aliases for every type will be displayed.
       `,
       type: client.types.INFO,
@@ -44,19 +44,19 @@ module.exports = class AliasesCommand extends Command {
       [ADMIN]: `${emojis.admin} ${capitalize(ADMIN)}`,
       [OWNER]: `${emojis.owner} ${capitalize(OWNER)}`
     };
-    
+
     if (args[0] && types.includes(type) && (type != OWNER || message.client.isOwner(message.member))) {
-      
+
       message.client.commands.forEach(command => {
-        if (command.aliases && command.type === type && !disabledCommands.includes(command.name)) 
+        if (command.aliases && command.type === type && !disabledCommands.includes(command.name))
           aliases[command.type].push(`**${command.name}:** ${command.aliases.map(a => `\`${a}\``).join(' ')}`);
       });
 
       embed
         .setTitle(`Alias Type: \`${capitalize(type)}\``)
-        .setThumbnail('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso.png')
+        .setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
         .addField(
-          `**${emojiMap[type]} [${aliases[type].reduce((a, b) => a + b.split(' ').slice(1).length, 0)}]**`, 
+          `**${emojiMap[type]} [${aliases[type].reduce((a, b) => a + b.split(' ').slice(1).length, 0)}]**`,
           aliases[type].join('\n')
         )
         .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
@@ -69,38 +69,38 @@ module.exports = class AliasesCommand extends Command {
     } else {
 
       message.client.commands.forEach(command => {
-        if (command.aliases && !disabledCommands.includes(command.name)) 
+        if (command.aliases && !disabledCommands.includes(command.name))
           aliases[command.type].push(`**${command.name}:** ${command.aliases.map(a => `\`${a}\``).join(' ')}`);
       });
 
       const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
 
       embed
-        .setTitle('Calypso\'s Alias Types')
+        .setTitle('vxn\'s Alias Types')
         .setDescription(stripIndent`
           **Prefix:** \`${prefix}\`
           **More Information:** \`${prefix}aliases [command type]\`
         `)
-        .setImage('https://raw.githubusercontent.com/sabattle/CalypsoBot/develop/data/images/Calypso_Title.png')
+        .setImage('https://cdn.discordapp.com/attachments/831673153716748318/839805792604913694/300.jpg')
         .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
         .setTimestamp()
         .setColor(message.guild.me.displayHexColor);
 
       for (const type of Object.values(message.client.types)) {
         if (type === OWNER && !message.client.isOwner(message.member)) continue;
-        if (aliases[type][0]) 
+        if (aliases[type][0])
           embed.addField(
             `**${emojiMap[type]}**`, `
-            \`${aliases[type].reduce((a, b) => a + b.split(' ').slice(1).length, 0)}\` aliases`, 
+            \`${aliases[type].reduce((a, b) => a + b.split(' ').slice(1).length, 0)}\` aliases`,
             true
           );
       }
 
       embed.addField(
-        '**Links**', 
-        '**[Invite Me](https://discordapp.com/oauth2/authorize?client_id=416451977380364288&scope=bot&permissions=403008599) | ' +
-        '[Support Server](https://discord.gg/pnYVdut) | ' +
-        '[Repository](https://github.com/sabattle/CalypsoBot)**'
+        '**Links**',
+        '**[Invite Me]([Your oauth2 URL]) | ' +
+        '[Support Server]([Your Support Server URL]) | ' +
+        '[Repository]([Your repository URL])**'
       );
 
     }

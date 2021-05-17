@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetModChannelsCommand extends Command {
@@ -12,7 +12,7 @@ module.exports = class SetModChannelsCommand extends Command {
       description: oneLine`
         Sets the moderator only text channels for your server.
         Only \`${client.utils.capitalize(client.types.MOD)}\` type commands will work in these channels,
-        and Calypso will only respond to members with permission to use those commands.
+        and vxn's minions will only respond to members with permission to use those commands.
         Provide no channels to clear the current \`mod channels\`.
       `,
       type: client.types.ADMIN,

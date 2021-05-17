@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success, fail } = require('../../utils/emojis.json');
+const { success, fail } = require('../../../data/text/emojis.json');
 const { oneLine } = require('common-tags');
 
 module.exports = class ToggleTypeCommand extends Command {
@@ -12,7 +12,7 @@ module.exports = class ToggleTypeCommand extends Command {
       description: oneLine`
         Enables or disables the provided command type.
         Commands of the provided type will disabled unless they are all already disabled,
-        in which case they will be enabled. 
+        in which case they will be enabled.
         Disabled commands will no longer be able to be used, and will no longer show up with the \`help\` command.
         \`${client.utils.capitalize(client.types.ADMIN)}\` commands cannot be disabled.
       `,
@@ -27,9 +27,9 @@ module.exports = class ToggleTypeCommand extends Command {
 
     if (args.length === 0 || args[0].toLowerCase() === OWNER)
       return this.sendErrorMessage(message, 0, 'Please provide a valid command type');
-    
+
     const type = args[0].toLowerCase();
-    
+
     if (type === ADMIN) return this.sendErrorMessage(message, 0, `${capitalize(ADMIN)} commands cannot be disabled`);
 
     let disabledCommands = message.client.db.settings.selectDisabledCommands.pluck().get(message.guild.id) || [];
@@ -51,7 +51,7 @@ module.exports = class ToggleTypeCommand extends Command {
           if (disabledCommands.includes(cmd.name)) message.client.utils.removeElement(disabledCommands, cmd.name);
         }
         description = `All \`${capitalize(type)}\` type commands have been successfully **enabled**. ${success}`;
-      
+
       // Disable type
       } else {
         for (const cmd of commands) {
@@ -60,7 +60,7 @@ module.exports = class ToggleTypeCommand extends Command {
         description = `All \`${capitalize(type)}\` type commands have been successfully **disabled**. ${fail}`;
       }
     } else return this.sendErrorMessage(message, 0, 'Please provide a valid command type');
-      
+
     message.client.db.settings.updateDisabledCommands.run(disabledCommands.join(' '), message.guild.id);
 
     disabledCommands = disabledCommands.map(c => `\`${c}\``).join(' ') || '`None`';

@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { verify } = require('../utils/emojis.json');
+const { verify } = require('../../data/text/emojis.json');
 const { stripIndent } = require('common-tags');
 
 module.exports = async (client, messageReaction, user) => {
@@ -10,7 +10,7 @@ module.exports = async (client, messageReaction, user) => {
 
   // Verification
   if (emoji.id === verify.split(':')[2].slice(0, -1)) {
-    const { verification_role_id: verificationRoleId, verification_message_id: verificationMessageId } = 
+    const { verification_role_id: verificationRoleId, verification_message_id: verificationMessageId } =
     client.db.settings.selectVerification.get(message.guild.id);
     const verificationRole = message.guild.roles.cache.get(verificationRoleId);
 
@@ -21,7 +21,7 @@ module.exports = async (client, messageReaction, user) => {
       try {
         await member.roles.add(verificationRole);
       } catch (err) {
-        return client.sendSystemErrorMessage(member.guild, 'verification', 
+        return client.sendSystemErrorMessage(member.guild, 'verification',
           stripIndent`Unable to assign verification role,` +
           'please check the role hierarchy and ensure I have the Manage Roles permission'
           , err.message);
@@ -34,7 +34,7 @@ module.exports = async (client, messageReaction, user) => {
     const starboardChannelId = client.db.settings.selectStarboardChannelId.pluck().get(message.guild.id);
     const starboardChannel = message.guild.channels.cache.get(starboardChannelId);
     if (
-      !starboardChannel || 
+      !starboardChannel ||
       !starboardChannel.viewable ||
       !starboardChannel.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS']) ||
       message.channel === starboardChannel
@@ -83,7 +83,7 @@ module.exports = async (client, messageReaction, user) => {
         const extension = message.embeds[0].url.split('.').pop();
         if (/(jpg|jpeg|png|gif)/gi.test(extension)) image = message.embeds[0].url;
       }
-      
+
       if (!message.content && !image) return;
 
       const embed = new MessageEmbed()

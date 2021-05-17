@@ -1,6 +1,6 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
-const { success } = require('../../utils/emojis.json');
+const { success } = require('../../../data/text/emojis.json');
 const { oneLine, stripIndent } = require('common-tags');
 
 module.exports = class SetNicknameLogCommand extends Command {
@@ -10,7 +10,7 @@ module.exports = class SetNicknameLogCommand extends Command {
       aliases: ['setnnl', 'snnl'],
       usage: 'setnicknamelog <channel mention/ID>',
       description: oneLine`
-        Sets the nickname change log text channel for your server. 
+        Sets the nickname change log text channel for your server.
         Provide no channel to clear the current \`nickname log\`.
       `,
       type: client.types.ADMIN,
@@ -36,7 +36,7 @@ module.exports = class SetNicknameLogCommand extends Command {
     }
 
     const nicknameLog = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
-    if (!nicknameLog || nicknameLog.type != 'text' || !nicknameLog.viewable) 
+    if (!nicknameLog || nicknameLog.type != 'text' || !nicknameLog.viewable)
       return this.sendErrorMessage(message, 0, stripIndent`
         Please mention an accessible text channel or provide a valid text channel ID
       `);

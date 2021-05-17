@@ -1,1 +1,1 @@
-nodemon app.js
+nodemon index.js

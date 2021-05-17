@@ -19,8 +19,8 @@ exports.bugReportChannelId = process.env.DISCORD_CHANNEL_ERROR;
 exports.feedbackChannelId = process.env.DISCORD_CHANNEL_REPORT;
 exports.serverLogId = process.env.DISCORD_CHANNEL_AUDIT;
 exports.apikeys = {
-	catApi : process.env.CAT_API,
-	googleApi : process.env.GOOGLE_YOUTUBE_API,
+	catApi : process.env.API_KEY_CAT,
+	googleApi : process.env.API_KEY_GOOGLE_SEARCH,
 };
 
 // －－－－－Group 03－－－－－

@@ -1,3 +1,10 @@
+// ================= START Web CODE ===================
+const http = require('http');
+http.createServer(function(req, res) {
+	res.write('System online');
+	res.end();
+}).listen(8080);
+// ================= END Web CODE ===================
 const config = require('./config');
 const Client = require('./src/Client.js');
 const { Intents } = require('discord.js');

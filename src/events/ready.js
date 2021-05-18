@@ -12,8 +12,10 @@ module.exports = async (client) => {
 
 	// Update activity every 30 seconds
 	setInterval(() => {
-		activities[2] = { name: `${client.guilds.cache.size} servers`, type: 'WATCHING' }; // Update server count
-		activities[3] = { name: `${client.users.cache.size} users`, type: 'WATCHING' }; // Update user count
+		// Update server count
+		activities[2] = { name: `${client.guilds.cache.size} servers`, type: 'WATCHING' };
+		// Update user count
+		activities[3] = { name: `${client.users.cache.size} users`, type: 'WATCHING' };
 		if (activity > 3) activity = 0;
 		client.user.setActivity(activities[activity]);
 		activity++;
@@ -27,11 +29,11 @@ module.exports = async (client) => {
      * ------------------------------------------------------------------------------------------------ */
 		// Find mod log
 		const modLog = guild.channels.cache.find(c => c.name.replace('-', '').replace('s', '') === 'modlog' ||
-      c.name.replace('-', '').replace('s', '') === 'moderatorlog');
+    c.name.replace('-', '').replace('s', '') === 'moderatorlog');
 
 		// Find admin and mod roles
 		const adminRole =
-      guild.roles.cache.find(r => r.name.toLowerCase() === 'admin' || r.name.toLowerCase() === 'administrator');
+    guild.roles.cache.find(r => r.name.toLowerCase() === 'admin' || r.name.toLowerCase() === 'administrator');
 		const modRole = guild.roles.cache.find(r => r.name.toLowerCase() === 'mod' || r.name.toLowerCase() === 'moderator');
 		const muteRole = guild.roles.cache.find(r => r.name.toLowerCase() === 'muted');
 		const crownRole = guild.roles.cache.find(r => r.name === 'The Crown');
@@ -43,10 +45,14 @@ module.exports = async (client) => {
 		client.db.settings.insertRow.run(
 			guild.id,
 			guild.name,
-			guild.systemChannelID, // Default channel
-			guild.systemChannelID, // Welcome channel
-			guild.systemChannelID, // Farewell channel
-			guild.systemChannelID, // Crown Channel
+			// Default channel
+			guild.systemChannelID,
+			// Welcome channel
+			guild.systemChannelID,
+			// Farewell channel
+			guild.systemChannelID,
+			// Crown Channel
+			guild.systemChannelID,
 			modLog ? modLog.id : null,
 			adminRole ? adminRole.id : null,
 			modRole ? modRole.id : null,
@@ -90,7 +96,7 @@ module.exports = async (client) => {
      * ------------------------------------------------------------------------------------------------ */
 		// Fetch verification message
 		const { verification_channel_id: verificationChannelId, verification_message_id: verificationMessageId } =
-      client.db.settings.selectVerification.get(guild.id);
+    client.db.settings.selectVerification.get(guild.id);
 		const verificationChannel = guild.channels.cache.get(verificationChannelId);
 		if (verificationChannel && verificationChannel.viewable) {
 			try {

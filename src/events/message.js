@@ -25,7 +25,8 @@ module.exports = (client, message) => {
 		const [, match] = message.content.match(prefixRegex);
 		const args = message.content.slice(match.length).trim().split(/ +/g);
 		const cmd = args.shift().toLowerCase();
-		const command = client.commands.get(cmd) || client.aliases.get(cmd); // If command not found, check aliases
+		// If command not found, check aliases
+		const command = client.commands.get(cmd) || client.aliases.get(cmd);
 		if (command && !disabledCommands.includes(command.name)) {
 
 			// Check if mod channel
@@ -36,7 +37,8 @@ module.exports = (client, message) => {
 				) {
 					// Update points with messagePoints value
 					if (pointTracking) {client.db.users.updatePoints.run({ points: messagePoints }, message.author.id, message.guild.id);}
-					return; // Return early so vxn's minions doesn't respond
+					// Return early so vxn's minions doesn't respond
+					return;
 				}
 			}
 
@@ -46,26 +48,28 @@ module.exports = (client, message) => {
 
 				// Update points with commandPoints value
 				if (pointTracking) {client.db.users.updatePoints.run({ points: commandPoints }, message.author.id, message.guild.id);}
-				message.command = true; // Add flag for messageUpdate event
-				return command.run(message, args); // Run command
+				// Add flag for messageUpdate event
+				message.command = true;
+				// Run command
+				return command.run(message, args);
 			}
 		}
 		else if (
 			(message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) &&
-      message.channel.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS']) &&
-      !modChannelIds.includes(message.channel.id)
+    message.channel.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS']) &&
+    !modChannelIds.includes(message.channel.id)
 		) {
 			const embed = new MessageEmbed()
 				.setTitle('Hi, I\'m vxn\'s minions. Need help?')
 				.setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
 				.setDescription(`You can see everything I can do by using the \`${prefix}help\` command.`)
 				.addField('Invite Me', oneLine`
-          You can add me to your server by clicking
-          [here]([Your oauth2 URL])!
+        You can add me to your server by clicking
+        [here]([Your oauth2 URL])!
         `)
 				.addField('Support', oneLine`
-          If you have questions, suggestions, or found a bug, please join the
-          [vxn's minions Support Server]([Your Support Server URL])!
+        If you have questions, suggestions, or found a bug, please join the
+        [vxn's minions Support Server]([Your Support Server URL])!
         `)
 				.setFooter('DM Nettles#8880 to speak directly with the developer!')
 				.setColor(message.guild.me.displayHexColor);

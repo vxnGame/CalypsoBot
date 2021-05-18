@@ -37,15 +37,15 @@ module.exports = async (client, guild) => {
 		for (const channel of guild.channels.cache.values()) {
 			try {
 				if (channel.viewable && channel.permissionsFor(guild.me).has('MANAGE_ROLES')) {
-					if (channel.type === 'text') // Deny permissions in text channels
-					{
+					// Deny permissions in text channels
+					if (channel.type === 'text') {
 						await channel.updateOverwrite(muteRole, {
 							'SEND_MESSAGES': false,
 							'ADD_REACTIONS': false,
 						});
 					}
-					else if (channel.type === 'voice' && channel.editable) // Deny permissions in voice channels
-					{
+					// Deny permissions in voice channels
+					else if (channel.type === 'voice' && channel.editable) {
 						await channel.updateOverwrite(muteRole, {
 							'SPEAK': false,
 							'STREAM': false,
@@ -83,10 +83,14 @@ module.exports = async (client, guild) => {
 	client.db.settings.insertRow.run(
 		guild.id,
 		guild.name,
-		guild.systemChannelID, // Default channel
-		guild.systemChannelID, // Welcome channel
-		guild.systemChannelID, // Farewell channel
-		guild.systemChannelID, // Crown Channel
+		// Default channel
+		guild.systemChannelID,
+		// Welcome channel
+		guild.systemChannelID,
+		// Farewell channel
+		guild.systemChannelID,
+		// Crown Channel
+		guild.systemChannelID,
 		modLog ? modLog.id : null,
 		adminRole ? adminRole.id : null,
 		modRole ? modRole.id : null,
@@ -124,7 +128,8 @@ module.exports = async (client, guild) => {
 						permissions: [],
 					},
 				});
-				position++; // Increment position to create roles in order
+				// Increment position to create roles in order
+				position++;
 			}
 			catch (err) {
 				client.logger.error(err.message);

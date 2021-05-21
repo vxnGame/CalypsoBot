@@ -11,23 +11,24 @@ module.exports = class SetCrownScheduleCommand extends Command {
 			aliases: ['setcs', 'scs'],
 			usage: 'setcrownschedule <cron>',
 			description: stripIndent`
-        Sets the schedule for vxn's minions crown role rotation.
-        The format is cron-style:
-        \`\`\`*    *    *    *    *
-        ┬    ┬    ┬    ┬    ┬
-        │    │    │    │    │
-        │    │    │    │    └ day of week (0 - 7)
-        │    │    │    └───── month (1 - 12)
-        │    │    └────────── day of month (1 - 31)
-        │    └─────────────── hour (0 - 23)
-        └──────────────────── minute (0 - 59)\`\`\`
-        If you wish to use multiple values for any of the categories, please separate them with \`,\`.` +
-        ' Step syntax is also supported, for example: `0 */1 * * *` (every hour). ' +
-        'For the day of the week, both 0 and 7 may represent Sunday. ' +
-        'If you need additional help building your cron, please check out this website: <https://crontab.guru/#>. ' +
-        `Enter no schedule to clear the current \`crown schedule\`.
-        A \`crown role\` must also be set to enable role rotation.
-        **Please Note:** To prevent potential Discord API abuse, minutes and seconds will always be set to \`0\`.`,
+			Sets the schedule for vxn's minions crown role rotation.
+			The format is cron-style:
+			\`\`\`*    *    *    *    *
+			┬    ┬    ┬    ┬    ┬
+			│    │    │    │    │
+			│    │    │    │    └ day of week (0 - 7)
+			│    │    │    └───── month (1 - 12)
+			│    │    └────────── day of month (1 - 31)
+			│    └─────────────── hour (0 - 23)
+			└──────────────────── minute (0 - 59)\`\`\`
+			If you wish to use multiple values for any of the categories, please separate them with \`,\`.` +
+			' Step syntax is also supported, for example: `0 */1 * * *` (every hour). ' +
+			'For the day of the week, both 0 and 7 may represent Sunday. ' +
+			'If you need additional help building your cron, please check out this website: <https://crontab.guru/#>. ' +
+			`Enter no schedule to clear the current \`crown schedule\`.
+			A \`crown role\` must also be set to enable role rotation.
+			**Please Note:** To prevent potential Discord API abuse, minutes and seconds will always be set to \`0\`.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setcrownschedule 0 21 * * 3,6', 'setcrownschedule 0 0 15 * *'],
@@ -64,7 +65,8 @@ module.exports = class SetCrownScheduleCommand extends Command {
 		// Clear schedule
 		if (!message.content.includes(' ')) {
 			message.client.db.settings.updateCrownSchedule.run(null, message.guild.id);
-			if (message.guild.job) message.guild.job.cancel(); // Cancel old job
+			// Cancel old job
+			if (message.guild.job) message.guild.job.cancel();
 
 			message.client.logger.info(`${message.guild.name}: Cancelled job`);
 
@@ -101,7 +103,8 @@ module.exports = class SetCrownScheduleCommand extends Command {
 		embed.setDescription(description);
 
 		message.client.db.settings.updateCrownSchedule.run(crownSchedule, message.guild.id);
-		if (message.guild.job) message.guild.job.cancel(); // Cancel old job
+		// Cancel old job
+		if (message.guild.job) message.guild.job.cancel();
 
 		// Schedule crown role rotation
 		message.client.utils.scheduleCrown(message.client, message.guild);

@@ -33,7 +33,8 @@ module.exports = class WarnsCommand extends Command {
 			const max = (count > current + 5) ? current + 5 : count;
 			let amount = 0;
 			for (let i = current; i < max; i++) {
-				embed // Build warning list
+				// Build warning list
+				embed
 					.addField('\u200b', `**Warn \`#${i + 1}\`**`)
 					.addField('Reason', warns.warns[i].reason)
 					.addField(

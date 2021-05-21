@@ -37,9 +37,9 @@ module.exports = class FeedbackCommand extends Command {
 			.setTitle('Feedback')
 			.setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
 			.setDescription(oneLine`
-        Successfully sent feedback!
-        Please join the [vxn's minions Support Server]([Your Support Server URL]) to further discuss your feedback.
-      `)
+			Successfully sent feedback!
+			Please join the [vxn's minions Support Server]([Your Support Server URL]) to further discuss your feedback.
+			`)
 			.addField('Member', message.member, true)
 			.addField('Message', feedback)
 			.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))

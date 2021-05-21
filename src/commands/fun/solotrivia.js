@@ -11,10 +11,10 @@ module.exports = class SoloTriviaCommand extends Command {
 			aliases: ['solotriv', 'striv', 'solot', 'st'],
 			usage: 'solotrivia [topic]',
 			description: oneLine`
-        Test your knowledge in a game of trivia (only you can answer).
-        If no topic is given, a random one will be chosen.
-        The question will expire after 15 seconds.
-      `,
+			Test your knowledge in a game of trivia (only you can answer).
+			If no topic is given, a random one will be chosen.
+			The question will expire after 15 seconds.
+			`,
 			type: client.types.FUN,
 			examples: ['solotrivia sports'],
 		});
@@ -22,7 +22,8 @@ module.exports = class SoloTriviaCommand extends Command {
 	run(message, args) {
 		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
 		let topic = args[0];
-		if (!topic) { // Pick a random topic if none given
+		// Pick a random topic if none given
+		if (!topic) {
 			topic = message.client.topics[Math.floor(Math.random() * message.client.topics.length)];
 		}
 		else if (!message.client.topics.includes(topic)) {return this.sendErrorMessage(message, 0, `Please provide a valid topic, use ${prefix}topics for a list`);}
@@ -53,7 +54,8 @@ module.exports = class SoloTriviaCommand extends Command {
 		let winner;
 		const collector = new MessageCollector(message.channel, msg => {
 			if (!msg.author.bot && msg.author == message.author) return true;
-		}, { time: 15000 }); // Wait 15 seconds
+			// Wait 15 seconds
+		}, { time: 15000 });
 		collector.on('collect', msg => {
 			if (answers.includes(msg.content.trim().toLowerCase().replace(/\.|'|-|\s/g, ''))) {
 				winner = msg.author;

@@ -10,11 +10,11 @@ module.exports = class SetModChannelsCommand extends Command {
 			aliases: ['setmodcs', 'setmcs', 'smcs'],
 			usage: 'setmodchannels <channel mentions/IDs>',
 			description: oneLine`
-        Sets the moderator only text channels for your server.
-        Only \`${client.utils.capitalize(client.types.MOD)}\` type commands will work in these channels,
-        and vxn's minions will only respond to members with permission to use those commands.
-        Provide no channels to clear the current \`mod channels\`.
-      `,
+			Sets the moderator only text channels for your server.
+			Only \`${client.utils.capitalize(client.types.MOD)}\` type commands will work in these channels,
+			and vxn's minions will only respond to members with permission to use those commands.
+			Provide no channels to clear the current \`mod channels\`.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setmodchannels #general #memes #off-topic'],
@@ -51,12 +51,13 @@ module.exports = class SetModChannelsCommand extends Command {
 			if (channel && channel.type === 'text' && channel.viewable) {channels.push(channel);}
 			else {
 				return this.sendErrorMessage(message, 0, stripIndent`
-        Please mention only accessible text channels or provide only valid text channel IDs
-      `);
+				Please mention only accessible text channels or provide only valid text channel IDs
+				`);
 			}
 		}
 		channels = [...new Set(channels)];
-		const channelIds = channels.map(c => c.id).join(' '); // Only keep unique IDs
+		// Only keep unique IDs
+		const channelIds = channels.map(c => c.id).join(' ');
 		message.client.db.settings.updateModChannelIds.run(channelIds, message.guild.id);
 		message.channel.send(embed.addField('Mod Channels', `${oldModChannels} ➔ ${trimArray(channels).join(' ')}`));
 	}

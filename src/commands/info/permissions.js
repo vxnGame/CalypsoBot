@@ -10,17 +10,17 @@ module.exports = class PermissionsCommand extends Command {
 			aliases: ['perms'],
 			usage: 'permissions [user mention/ID]',
 			description: oneLine`
-        Displays all current permissions for the specified user.
-        If no user is given, your own permissions will be displayed.
-      `,
+			Displays all current permissions for the specified user.
+			If no user is given, your own permissions will be displayed.
+			`,
 			type: client.types.INFO,
 			examples: ['permissions @Nettles'],
 		});
 	}
 	run(message, args) {
 		const member = this.getMemberFromMention(message, args[0]) ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+		message.guild.members.cache.get(args[0]) ||
+		message.member;
 
 		// Get member permissions
 		const memberPermissions = member.permissions.toArray();

@@ -12,7 +12,8 @@ module.exports = class PrefixCommand extends Command {
 		});
 	}
 	run(message) {
-		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id); // Get prefix
+		// Get prefix
+		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
 		const embed = new MessageEmbed()
 			.setTitle('vxn\'s Prefix')
 			.setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')

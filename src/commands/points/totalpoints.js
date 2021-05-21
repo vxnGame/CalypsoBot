@@ -14,8 +14,8 @@ module.exports = class TotalPointsCommand extends Command {
 	}
 	run(message, args) {
 		const member = this.getMemberFromMention(message, args[0]) ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+		message.guild.members.cache.get(args[0]) ||
+		message.member;
 		const points = message.client.db.users.selectTotalPoints.pluck().get(member.id, message.guild.id);
 		const embed = new MessageEmbed()
 			.setTitle(`${member.displayName}'s Total Points`)

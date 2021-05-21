@@ -10,9 +10,9 @@ module.exports = class SetMessageEditLogCommand extends Command {
 			aliases: ['setmsgeditlog', 'setmel', 'smel'],
 			usage: 'setmessageeditlog <channel mention/ID>',
 			description: oneLine`
-        Sets the message edit log text channel for your server.
-        Provide no channel to clear the current \`message edit log\`.
-      `,
+			Sets the message edit log text channel for your server.
+			Provide no channel to clear the current \`message edit log\`.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setmessageeditlog #bot-log'],
@@ -39,7 +39,7 @@ module.exports = class SetMessageEditLogCommand extends Command {
 		if (!messageEditLog || messageEditLog.type != 'text' || !messageEditLog.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
         Please mention an accessible text channel or provide a valid text channel ID
-      `);
+		`);
 		}
 		message.client.db.settings.updateMessageEditLogId.run(messageEditLog.id, message.guild.id);
 		message.channel.send(embed.addField('Message Edit Log', `${oldMessageEditLog} ➔ ${messageEditLog}`));

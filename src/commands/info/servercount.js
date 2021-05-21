@@ -14,8 +14,8 @@ module.exports = class ServerCountCommand extends Command {
 	}
 	run(message) {
 		const counts = stripIndent`
-      Servers :: ${message.client.guilds.cache.size}
-      Users   :: ${message.client.users.cache.size}
+		Servers :: ${message.client.guilds.cache.size}
+		Users   :: ${message.client.users.cache.size}
     `;
 		const embed = new MessageEmbed()
 			.setTitle('vxn\'s Server Count')

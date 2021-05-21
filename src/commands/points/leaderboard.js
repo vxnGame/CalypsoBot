@@ -10,10 +10,10 @@ module.exports = class LeaderboardCommand extends Command {
 			aliases: ['top', 'lb', 'rankings'],
 			usage: 'leaderboard [member count]',
 			description: oneLine`
-        Displays the server points leaderboard of the provided member count.
-        If no member count is given, the leaderboard will default to size 10.
-        The max leaderboard size is 25.
-      `,
+			Displays the server points leaderboard of the provided member count.
+			If no member count is given, the leaderboard will default to size 10.
+			The max leaderboard size is 25.
+			`,
 			type: client.types.POINTS,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'ADD_REACTIONS'],
 			examples: ['leaderboard 20'],
@@ -31,7 +31,7 @@ module.exports = class LeaderboardCommand extends Command {
 		for (const row of leaderboard) {
 			members.push(oneLine`
         **${count}.** ${await message.guild.members.cache.get(row.user_id)} - \`${row.points}\` points
-      `);
+		`);
 			count++;
 		}
 

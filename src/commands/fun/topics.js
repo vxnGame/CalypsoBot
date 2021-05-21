@@ -12,7 +12,8 @@ module.exports = class TopicsCommand extends Command {
 		});
 	}
 	run(message) {
-		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id); // Get prefix
+		// Get prefix
+		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
 		const topics = [];
 		message.client.topics.forEach(topic => {
 			topics.push(`\`${topic}\``);

@@ -17,9 +17,9 @@ module.exports = class InviteMeCommand extends Command {
 			.setTitle('Invite Me')
 			.setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
 			.setDescription(oneLine`
-        Click [here]([Your oauth2 URL])
-        to invite me to your server!
-      `)
+			Click [here]([Your oauth2 URL])
+			to invite me to your server!
+			`)
 			.addField('Other Links',
 				'**[Support Server]([Your Support Server URL]) | ' +
         '[Repository]([Your repository URL])**',

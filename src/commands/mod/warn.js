@@ -21,7 +21,8 @@ module.exports = class WarnCommand extends Command {
 		if (member === message.member) {return this.sendErrorMessage(message, 0, 'You cannot warn yourself');}
 		if (member.roles.highest.position >= message.member.roles.highest.position) {return this.sendErrorMessage(message, 0, 'You cannot warn someone with an equal or higher role');}
 
-		const autoKick = message.client.db.settings.selectAutoKick.pluck().get(message.guild.id); // Get warn # for auto kick
+		// Get warn # for auto kick
+		const autoKick = message.client.db.settings.selectAutoKick.pluck().get(message.guild.id);
 
 		let reason = args.slice(1).join(' ');
 		if (!reason) reason = '`None`';

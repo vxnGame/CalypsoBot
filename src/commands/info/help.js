@@ -10,10 +10,10 @@ module.exports = class HelpCommand extends Command {
 			aliases: ['commands', 'h'],
 			usage: 'help [command | all]',
 			description: oneLine`
-        Displays a list of all current commands, sorted by category.
-        Can be used in conjunction with a command for additional information.
-        Will only display commands that you have permission to access unless the \`all\` parameter is given.
-      `,
+			Displays a list of all current commands, sorted by category.
+			Can be used in conjunction with a command for additional information.
+			Will only display commands that you have permission to access unless the \`all\` parameter is given.
+			`,
 			type: client.types.INFO,
 			examples: ['help ping'],
 		});
@@ -26,18 +26,20 @@ module.exports = class HelpCommand extends Command {
 
 		const all = (args[0] === 'all') ? args[0] : '';
 		const embed = new MessageEmbed();
-		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id); // Get prefix
+		// Get prefix
+		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
 		const { INFO, FUN, COLOR, POINTS, MISC, MOD, ADMIN, OWNER } = message.client.types;
 		const { capitalize } = message.client.utils;
 
 		const command = message.client.commands.get(args[0]) || message.client.aliases.get(args[0]);
 		if (
 			command &&
-      (command.type != OWNER || message.client.isOwner(message.member)) &&
-      !disabledCommands.includes(command.name)
+			(command.type != OWNER || message.client.isOwner(message.member)) &&
+			!disabledCommands.includes(command.name)
 		) {
 
-			embed // Build specific command help embed
+			// Build specific command help embed
+			embed
 				.setTitle(`Command: \`${command.name}\``)
 				.setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
 				.setDescription(command.description)
@@ -85,13 +87,14 @@ module.exports = class HelpCommand extends Command {
 			const total = Object.values(commands).reduce((a, b) => a + b.length, 0) - commands[OWNER].length;
 			const size = message.client.commands.size - commands[OWNER].length;
 
-			embed // Build help embed
+			// Build help embed
+			embed
 				.setTitle('vxn\'s Commands')
 				.setDescription(stripIndent`
-          **Prefix:** \`${prefix}\`
-          **More Information:** \`${prefix}help [command]\`
-          ${(!all && size != total) ? `**All Commands:** \`${prefix}help all\`` : ''}
-        `)
+				**Prefix:** \`${prefix}\`
+				**More Information:** \`${prefix}help [command]\`
+				${(!all && size != total) ? `**All Commands:** \`${prefix}help all\`` : ''}
+				`)
 				.setFooter(
 					(!all && size != total) ?
 						'Only showing available commands.\n' + message.member.displayName : message.member.displayName,
@@ -109,8 +112,8 @@ module.exports = class HelpCommand extends Command {
 			embed.addField(
 				'**Links**',
 				'**[Invite Me]([Your oauth2 URL]) | ' +
-        '[Support Server]([Your Support Server URL]) | ' +
-        '[Repository]([Your repository URL])**',
+				'[Support Server]([Your Support Server URL]) | ' +
+				'[Repository]([Your repository URL])**',
 			);
 
 		}

@@ -16,7 +16,8 @@ module.exports = class PingCommand extends Command {
 			.setDescription('`Pinging...`')
 			.setColor(message.guild.me.displayHexColor);
 		const msg = await message.channel.send(embed);
-		const timestamp = (message.editedTimestamp) ? message.editedTimestamp : message.createdTimestamp; // Check if edited
+		// Check if edited
+		const timestamp = (message.editedTimestamp) ? message.editedTimestamp : message.createdTimestamp;
 		const latency = `\`\`\`ini\n[ ${Math.floor(msg.createdTimestamp - timestamp)}ms ]\`\`\``;
 		const apiLatency = `\`\`\`ini\n[ ${Math.round(message.client.ws.ping)}ms ]\`\`\``;
 		embed.setTitle(`Pong!  ${pong}`)

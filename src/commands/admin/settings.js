@@ -9,9 +9,9 @@ module.exports = class SettingsCommand extends Command {
 			aliases: ['set', 's', 'config', 'conf'],
 			usage: 'settings [category]',
 			description: oneLine`
-        Displays a list of all current settings for the given setting category.
-        If no category is given, the amount of settings for every category will be displayed.
-      `,
+			Displays a list of all current settings for the given setting category.
+			If no category is given, the amount of settings for every category will be displayed.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['settings System'],
@@ -171,8 +171,8 @@ module.exports = class SettingsCommand extends Command {
 		}
 		if (setting) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        Please enter a valid settings category, use ${row.prefix}settings for a list
-      `);
+			Please enter a valid settings category, use ${row.prefix}settings for a list
+			`);
 		}
 
 		/** ------------------------------------------------------------------------------------------------

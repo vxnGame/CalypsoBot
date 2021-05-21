@@ -15,13 +15,13 @@ module.exports = class PointPerCommand extends Command {
 	run(message) {
 
 		// Get points values
-		const { message_points: messagePoints, command_points: commandPoints, voice_points: voicePoints }
-      = message.client.db.settings.selectPoints.get(message.guild.id);
+		const { message_points: messagePoints, command_points: commandPoints, voice_points: voicePoints } =
+			message.client.db.settings.selectPoints.get(message.guild.id);
 		const pointsPer = stripIndent`
-      Message Points :: ${messagePoints} per message
-      Command Points :: ${commandPoints} per command
-      Voice Points   :: ${voicePoints} per minute
-    `;
+		Message Points :: ${messagePoints} per message
+		Command Points :: ${commandPoints} per command
+		Voice Points   :: ${voicePoints} per minute
+		`;
 
 		const embed = new MessageEmbed()
 			.setTitle('Points Per Action')

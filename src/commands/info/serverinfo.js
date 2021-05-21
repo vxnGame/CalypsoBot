@@ -42,7 +42,8 @@ module.exports = class ServerInfoCommand extends Command {
 	run(message) {
 
 		// Get roles count
-		const roleCount = message.guild.roles.cache.size - 1; // Don't count @everyone
+		// Don't count @everyone
+		const roleCount = message.guild.roles.cache.size - 1;
 
 		// Get member stats
 		const members = message.guild.members.cache.array();
@@ -56,8 +57,7 @@ module.exports = class ServerInfoCommand extends Command {
 		// Get channel stats
 		const channels = message.guild.channels.cache.array();
 		const channelCount = channels.length;
-		const textChannels =
-      channels.filter(c => c.type === 'text' && c.viewable).sort((a, b) => a.rawPosition - b.rawPosition);
+		const textChannels = channels.filter(c => c.type === 'text' && c.viewable).sort((a, b) => a.rawPosition - b.rawPosition);
 		const voiceChannels = channels.filter(c => c.type === 'voice').length;
 		const newsChannels = channels.filter(c => c.type === 'news').length;
 		const categoryChannels = channels.filter(c => c.type === 'category').length;

@@ -9,12 +9,12 @@ module.exports = class PurgeCommand extends Command {
 			aliases: ['clear'],
 			usage: 'purge [channel mention/ID] [user mention/ID] <message count> [reason]',
 			description: oneLine`
-        Deletes the specified amount of messages from the provided channel.
-        If no channel is given, the messages will be deleted from the current channel.
-        If a member is provided, only their messages will be deleted from the batch.
-        No more than 100 messages may be deleted at a time.
-        Messages older than 2 weeks old cannot be deleted.
-      `,
+			Deletes the specified amount of messages from the provided channel.
+			If no channel is given, the messages will be deleted from the current channel.
+			If a member is provided, only their messages will be deleted from the batch.
+			No more than 100 messages may be deleted at a time.
+			Messages older than 2 weeks old cannot be deleted.
+			`,
 			type: client.types.MOD,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_MESSAGES'],
 			userPermissions: ['MANAGE_MESSAGES'],
@@ -32,8 +32,8 @@ module.exports = class PurgeCommand extends Command {
 		// Check type and viewable
 		if (channel.type != 'text' || !channel.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-      Please mention an accessible text channel or provide a valid text channel ID
-    `);
+			Please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 
 		const member = this.getMemberFromMention(message, args[0]) || message.guild.members.cache.get(args[0]);
@@ -51,7 +51,8 @@ module.exports = class PurgeCommand extends Command {
 		if (!reason) reason = '`None`';
 		if (reason.length > 1024) reason = reason.slice(0, 1021) + '...';
 
-		await message.delete(); // Delete command message
+		// Delete command message
+		await message.delete();
 
 		// Find member messages if given
 		let messages;
@@ -60,15 +61,16 @@ module.exports = class PurgeCommand extends Command {
 		}
 		else {messages = amount;}
 
-		if (messages.size === 0) { // No messages found
+		// No messages found
+		if (messages.size === 0) {
 
 			message.channel.send(
 				new MessageEmbed()
 					.setTitle('Purge')
 					.setDescription(`
-            Unable to find any messages from ${member}.
-            This message will be deleted after \`10 seconds\`.
-          `)
+					Unable to find any messages from ${member}.
+					This message will be deleted after \`10 seconds\`.
+					`)
 					.addField('Channel', channel, true)
 					.addField('Member', member)
 					.addField('Found Messages', `\`${messages.size}\``, true)
@@ -78,15 +80,16 @@ module.exports = class PurgeCommand extends Command {
 			).then(msg => msg.delete({ timeout: 10000 })).catch(err => message.client.logger.error(err.stack));
 
 		}
-		else { // Purge messages
+		// Purge messages
+		else {
 
 			channel.bulkDelete(messages, true).then(messages => {
 				const embed = new MessageEmbed()
 					.setTitle('Purge')
 					.setDescription(`
-            Successfully deleted **${messages.size}** message(s).
-            This message will be deleted after \`10 seconds\`.
-          `)
+					Successfully deleted **${messages.size}** message(s).
+					This message will be deleted after \`10 seconds\`.
+					`)
 					.addField('Channel', channel, true)
 					.addField('Message Count', `\`${messages.size}\``, true)
 					.addField('Reason', reason)

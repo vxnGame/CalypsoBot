@@ -10,9 +10,9 @@ module.exports = class SetStarboardChannelCommand extends Command {
 			aliases: ['setstc', 'sstc'],
 			usage: 'setstarboardchannel <channel mention/ID>',
 			description: oneLine`
-        Sets the starboard text channel for your server.
-        Provide no channel to clear the current \`starboard channel\`.
-      `,
+			Sets the starboard text channel for your server.
+			Provide no channel to clear the current \`starboard channel\`.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setstarboardchannel #starboard'],
@@ -38,12 +38,12 @@ module.exports = class SetStarboardChannelCommand extends Command {
 		const starboardChannel = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
 		if (
 			!starboardChannel ||
-      (starboardChannel.type != 'text' && starboardChannel.type != 'news') ||
-      !starboardChannel.viewable
+			(starboardChannel.type != 'text' && starboardChannel.type != 'news') ||
+			!starboardChannel.viewable
 		) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        Please mention an accessible text or announcement channel or provide a valid text or announcement channel ID
-      `);
+			Please mention an accessible text or announcement channel or provide a valid text or announcement channel ID
+			`);
 		}
 		message.client.db.settings.updateStarboardChannelId.run(starboardChannel.id, message.guild.id);
 		message.channel.send(embed.addField('Starboard Channel', `${oldStarboardChannel} ➔ ${starboardChannel}`));

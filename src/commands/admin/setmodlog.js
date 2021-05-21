@@ -10,9 +10,9 @@ module.exports = class SetModLogCommand extends Command {
 			aliases: ['setml', 'sml'],
 			usage: 'setmodlog <channel mention/ID>',
 			description: oneLine`
-        Sets the mod log text channel for your server.
-        Provide no channel to clear the current \`mod log\`.
-      `,
+			Sets the mod log text channel for your server.
+			Provide no channel to clear the current \`mod log\`.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setmodlog #mod-log'],
@@ -38,8 +38,8 @@ module.exports = class SetModLogCommand extends Command {
 		const modLog = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
 		if (!modLog || modLog.type != 'text' || !modLog.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        Please mention an accessible text channel or provide a valid text channel ID
-      `);
+			Please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 		message.client.db.settings.updateModLogId.run(modLog.id, message.guild.id);
 		message.channel.send(embed.addField('Mod Log', `${oldModLog} ➔ ${modLog}`));

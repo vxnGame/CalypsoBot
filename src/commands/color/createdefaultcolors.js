@@ -11,9 +11,9 @@ module.exports = class CreateDefaultColorsCommand extends Command {
 			aliases: ['cdc'],
 			usage: 'createdefaultcolors',
 			description: oneLine`
-        Generates the ${len} default color roles that come with packaged with vxn's minions on your server.
-        Color roles are denoted by the prefix \`#\`.
-      `,
+			Generates the ${len} default color roles that come with packaged with vxn's minions on your server.
+			Color roles are denoted by the prefix \`#\`.
+			`,
 			type: client.types.COLOR,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_ROLES'],
 			userPermissions: ['MANAGE_ROLES'],
@@ -43,7 +43,8 @@ module.exports = class CreateDefaultColorsCommand extends Command {
 						},
 					});
 					colorList.push(role);
-					position++; // Increment position to create roles in order
+					// Increment position to create roles in order
+					position++;
 				}
 				catch (err) {
 					message.client.logger.error(err.message);
@@ -51,7 +52,8 @@ module.exports = class CreateDefaultColorsCommand extends Command {
 			}
 		}
 		const fails = len - colorList.length;
-		embed // Build embed
+		// Build embed
+		embed
 			.setThumbnail(message.guild.iconURL({ dynamic: true }))
 			.setDescription(`Created \`${len - fails}\` of  \`${len}\` default colors.`)
 			.addField('Colors Created', (colorList.length > 0) ? colorList.reverse().join(' ') : '`None`')

@@ -22,7 +22,8 @@ module.exports = class WarnPurgeCommand extends Command {
 		if (member === message.member) {return this.sendErrorMessage(message, 0, 'You cannot warn yourself');}
 		if (member.roles.highest.position >= message.member.roles.highest.position) {return this.sendErrorMessage(message, 0, 'You cannot warn someone with an equal or higher role');}
 
-		const autoKick = message.client.db.settings.selectAutoKick.pluck().get(message.guild.id); // Get warn # for auto kick
+		// Get warn # for auto kick
+		const autoKick = message.client.db.settings.selectAutoKick.pluck().get(message.guild.id);
 
 		const amount = parseInt(args[1]);
 		if (isNaN(amount) === true || !amount || amount < 0 || amount > 100) {return this.sendErrorMessage(message, 0, 'Please provide a message count between 1 and 100');}

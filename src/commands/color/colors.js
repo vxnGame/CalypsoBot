@@ -24,7 +24,8 @@ module.exports = class ColorsCommand extends Command {
 			.setTimestamp()
 			.setColor(message.guild.me.displayHexColor);
 
-		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id); // Get prefix
+		// Get prefix
+		const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
 
 		const interval = 50;
 		if (colors.length === 0) {message.channel.send(embed.setDescription('No colors found.'));}
@@ -49,8 +50,8 @@ module.exports = class ColorsCommand extends Command {
 					message.author.displayAvatarURL({ dynamic: true }),
 				)
 				.setDescription(`
-          ${colors.slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
-        `);
+					${colors.slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
+				`);
 
 			const json = embed.toJSON();
 
@@ -61,7 +62,7 @@ module.exports = class ColorsCommand extends Command {
 					.setTitle('Available Colors ' + getRange(colors, n, interval))
 					.setDescription(`
             ${colors.slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
-          `);
+			`);
 			};
 
 			const next = () => {

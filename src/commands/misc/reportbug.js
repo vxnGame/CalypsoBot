@@ -9,9 +9,9 @@ module.exports = class ReportBugCommand extends Command {
 			aliases: ['bugreport', 'report', 'bug', 'rb', 'br'],
 			usage: 'reportbug <message>',
 			description: oneLine`
-        Sends a message to the vxn's minions Support Server's bug report channel.
-        When reporting a bug, please include as much information as possible.
-      `,
+			Sends a message to the vxn's minions Support Server's bug report channel.
+			When reporting a bug, please include as much information as possible.
+			`,
 			type: client.types.MISC,
 			examples: ['reportbug bot is botched'],
 		});
@@ -40,10 +40,10 @@ module.exports = class ReportBugCommand extends Command {
 			.setTitle('Bug Report')
 			.setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
 			.setDescription(oneLine`
-        Successfully sent bug report!
-        Please join the [vxn's minions Support Server]([Your Support Server URL]) to further discuss your issue.
-        Additionally, feel free to submit an issue on [GitHub]([Your repository URL]/issues).
-      `)
+			Successfully sent bug report!
+			Please join the [vxn's minions Support Server]([Your Support Server URL]) to further discuss your issue.
+			Additionally, feel free to submit an issue on [GitHub]([Your repository URL]/issues).
+			`)
 			.addField('Member', message.member, true)
 			.addField('Message', report)
 			.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))

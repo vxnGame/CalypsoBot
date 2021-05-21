@@ -9,10 +9,8 @@ module.exports = class SetAutoKickCommand extends Command {
 			name: 'setautokick',
 			aliases: ['setak', 'sak'],
 			usage: 'setautokick <warn count>',
-			description: oneLine`
-        Sets the amount of warns needed before vxn's minions will automatically kick someone from your server.
-        Provide no warn count or a warn count of 0 to disable \`auto kick\`.
-      `,
+			description: oneLine`Sets the amount of warns needed before vxn's minions will automatically kick someone from your server.
+			Provide no warn count or a warn count of 0 to disable \`auto kick\`.`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setautokick 3'],

@@ -22,8 +22,8 @@ module.exports = class GivePointsCommand extends Command {
 		if (isNaN(amount) === true || !amount) {return this.sendErrorMessage(message, 0, 'Please provide a valid point count');}
 		if (amount < 0 || amount > points) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-      Please provide a point count less than or equal to ${points} (your total points)
-    `);
+			Please provide a point count less than or equal to ${points} (your total points)
+			`);
 		}
 		// Remove points
 		message.client.db.users.updatePoints.run({ points: -amount }, message.author.id, message.guild.id);

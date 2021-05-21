@@ -10,10 +10,10 @@ module.exports = class SetSystemChannelCommand extends Command {
 			aliases: ['setsc', 'ssc'],
 			usage: 'setsystemchannel <channel mention/ID>',
 			description: oneLine`
-        Sets the system text channel for your server. This is where vxn's minions system messages will be sent.
-        Provide no channel to clear the current \`system channel\`. Clearing this setting is **not recommended**
-        as vxn's minions requires a \`system channel\` to notify you about important errors.
-      `,
+			Sets the system text channel for your server. This is where vxn's minions system messages will be sent.
+			Provide no channel to clear the current \`system channel\`. Clearing this setting is **not recommended**
+			as vxn's minions requires a \`system channel\` to notify you about important errors.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setsystemchannel #general'],
@@ -39,8 +39,8 @@ module.exports = class SetSystemChannelCommand extends Command {
 		const systemChannel = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
 		if (!systemChannel || (systemChannel.type != 'text' && systemChannel.type != 'news') || !systemChannel.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        Please mention an accessible text or announcement channel or provide a valid text or announcement channel ID
-      `);
+			Please mention an accessible text or announcement channel or provide a valid text or announcement channel ID
+			`);
 		}
 		message.client.db.settings.updateSystemChannelId.run(systemChannel.id, message.guild.id);
 		message.channel.send(embed.addField('System Channel', `${oldSystemChannel} ➔ ${systemChannel}`));

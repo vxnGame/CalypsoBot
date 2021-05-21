@@ -24,8 +24,8 @@ module.exports = (client, message) => {
 		const messageDeleteLog = message.guild.channels.cache.get(messageDeleteLogId);
 		if (
 			messageDeleteLog &&
-      messageDeleteLog.viewable &&
-      messageDeleteLog.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+			messageDeleteLog.viewable &&
+			messageDeleteLog.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 
 			if (message.content.length > 1024) message.content = message.content.slice(0, 1021) + '...';
@@ -46,8 +46,8 @@ module.exports = (client, message) => {
 		const messageDeleteLog = message.guild.channels.cache.get(messageDeleteLogId);
 		if (
 			messageDeleteLog &&
-      messageDeleteLog.viewable &&
-      messageDeleteLog.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+			messageDeleteLog.viewable &&
+			messageDeleteLog.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 
 			embed

@@ -14,8 +14,8 @@ module.exports = (client, oldMember, newMember) => {
 		const nicknameLog = oldMember.guild.channels.cache.get(nicknameLogId);
 		if (
 			nicknameLog &&
-      nicknameLog.viewable &&
-      nicknameLog.permissionsFor(oldMember.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+			nicknameLog.viewable &&
+			nicknameLog.permissionsFor(oldMember.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 			const oldNickname = oldMember.nickname || '`None`';
 			const newNickname = newMember.nickname || '`None`';
@@ -34,8 +34,8 @@ module.exports = (client, oldMember, newMember) => {
 		const roleLog = oldMember.guild.channels.cache.get(roleLogId);
 		if (
 			roleLog &&
-      roleLog.viewable &&
-      roleLog.permissionsFor(oldMember.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+			roleLog.viewable &&
+			roleLog.permissionsFor(oldMember.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 			const role = newMember.roles.cache.difference(oldMember.roles.cache).first();
 			embed
@@ -52,8 +52,8 @@ module.exports = (client, oldMember, newMember) => {
 		const roleLog = oldMember.guild.channels.cache.get(roleLogId);
 		if (
 			roleLog &&
-      roleLog.viewable &&
-      roleLog.permissionsFor(oldMember.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+			roleLog.viewable &&
+			roleLog.permissionsFor(oldMember.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 			const role = oldMember.roles.cache.difference(newMember.roles.cache).first();
 			embed

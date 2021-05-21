@@ -9,17 +9,17 @@ module.exports = class PositionCommand extends Command {
 			aliases: ['pos'],
 			usage: 'position <user mention/ID>',
 			description: oneLine`
-        Fetches a user's current leaderboard position.
-        If no user is given, your own position will be displayed.
-      `,
+			Fetches a user's current leaderboard position.
+			If no user is given, your own position will be displayed.
+			`,
 			type: client.types.POINTS,
 			examples: ['position @Nettles'],
 		});
 	}
 	run(message, args) {
 		const member = this.getMemberFromMention(message, args[0]) ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+		message.guild.members.cache.get(args[0]) ||
+		message.member;
 		const leaderboard = message.client.db.users.selectLeaderboard.all(message.guild.id);
 		const pos = leaderboard.map(row => row.user_id).indexOf(member.id) + 1;
 		const ordinalPos = message.client.utils.getOrdinalNumeral(pos);

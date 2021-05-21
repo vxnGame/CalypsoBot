@@ -10,10 +10,10 @@ module.exports = class SetFarewellChannelCommand extends Command {
 			aliases: ['setfc', 'sfc'],
 			usage: 'setfarewellchannel <channel mention/ID>',
 			description: oneLine`
-        Sets the farewell message text channel for your server.
-        Provide no channel to clear the current \`farewell channel\`.
-        A \`farewell message\` must also be set to enable farewell messages.
-      `,
+			Sets the farewell message text channel for your server.
+			Provide no channel to clear the current \`farewell channel\`.
+			A \`farewell message\` must also be set to enable farewell messages.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setfarewellchannel #general'],
@@ -21,7 +21,7 @@ module.exports = class SetFarewellChannelCommand extends Command {
 	}
 	run(message, args) {
 		let { farewell_channel_id: farewellChannelId, farewell_message: farewellMessage } =
-      message.client.db.settings.selectFarewells.get(message.guild.id);
+		message.client.db.settings.selectFarewells.get(message.guild.id);
 		const oldFarewellChannel = message.guild.channels.cache.get(farewellChannelId) || '`None`';
 
 		// Get status
@@ -57,7 +57,7 @@ module.exports = class SetFarewellChannelCommand extends Command {
 		if (!farewellChannel || (farewellChannel.type != 'text' && farewellChannel.type != 'news') || !farewellChannel.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
         Please mention an accessible text or announcement channel or provide a valid text or announcement channel ID
-      `);
+		`);
 		}
 
 		// Update status

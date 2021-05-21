@@ -27,7 +27,7 @@ class Client extends Discord.Client {
 		/**
      * Create database
      */
-	this.db = require('./utils/db.js');
+		this.db = require('./utils/db.js');
 
 		/**
      * All possible command types
@@ -122,7 +122,8 @@ class Client extends Discord.Client {
 				const eventName = f.substring(0, f.indexOf('.'));
 				const event = require(resolve(__basedir, join(path, f)));
 				super.on(eventName, event.bind(null, this));
-				delete require.cache[require.resolve(resolve(__basedir, join(path, f)))]; // Clear cache
+				// Clear cache
+				delete require.cache[require.resolve(resolve(__basedir, join(path, f)))];
 				this.logger.info(`Loading event: ${eventName}`);
 			});
 		});
@@ -141,7 +142,8 @@ class Client extends Discord.Client {
 			const commands = readdirSync(resolve(__basedir, join(path, dir))).filter(f => f.endsWith('js'));
 			commands.forEach(f => {
 				const Command = require(resolve(__basedir, join(path, dir, f)));
-				const command = new Command(this); // Instantiate the specific command
+				// Instantiate the specific command
+				const command = new Command(this);
 				if (command.name && !command.disabled) {
 					// Map command
 					this.commands.set(command.name, command);
@@ -206,10 +208,11 @@ class Client extends Discord.Client {
 		const systemChannelId = this.db.settings.selectSystemChannelId.pluck().get(guild.id);
 		const systemChannel = guild.channels.cache.get(systemChannelId);
 
-		if ( // Check channel and permissions
+		// Check channel and permissions
+		if (
 			!systemChannel ||
-      !systemChannel.viewable ||
-      !systemChannel.permissionsFor(guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+    !systemChannel.viewable ||
+    !systemChannel.permissionsFor(guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) return;
 
 		const embed = new Discord.MessageEmbed()

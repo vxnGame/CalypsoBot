@@ -10,9 +10,9 @@ module.exports = class SetMessageDeleteLogCommand extends Command {
 			aliases: ['setmsgdeletelog', 'setmdl', 'smdl'],
 			usage: 'setmessagedeletelog <channel mention/ID>',
 			description: oneLine`
-        Sets the message delete log text channel for your server.
-        Provide no channel to clear the current \`message delete log\`.
-      `,
+			Sets the message delete log text channel for your server.
+			Provide no channel to clear the current \`message delete log\`.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setmessagedeletelog #bot-log'],
@@ -38,8 +38,8 @@ module.exports = class SetMessageDeleteLogCommand extends Command {
 		const messageDeleteLog = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
 		if (!messageDeleteLog || messageDeleteLog.type != 'text' || !messageDeleteLog.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        Please mention an accessible text channel or provide a valid text channel ID
-      `);
+			Please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 		message.client.db.settings.updateMessageDeleteLogId.run(messageDeleteLog.id, message.guild.id);
 		message.channel.send(embed.addField('Message Delete Log', `${oldMessageDeleteLog} ➔ ${messageDeleteLog}`));

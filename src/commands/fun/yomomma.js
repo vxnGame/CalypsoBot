@@ -10,17 +10,17 @@ module.exports = class YoMommaCommand extends Command {
 			aliases: ['yourmom', 'yomamma', 'yomama', 'ym'],
 			usage: 'yomomma [user mention/ID]',
 			description: oneLine`
-        Says a random "yo momma" joke to the specified user.
-        If no user is given, then the joke will be directed at you!
-      `,
+			Says a random "yo momma" joke to the specified user.
+			If no user is given, then the joke will be directed at you!
+			`,
 			type: client.types.FUN,
 			examples: ['yomomma @Nettles'],
 		});
 	}
 	async run(message, args) {
 		const member = this.getMemberFromMention(message, args[0]) ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+		message.guild.members.cache.get(args[0]) ||
+		message.member;
 		try {
 			const res = await fetch('https://api.yomomma.info');
 			let joke = (await res.json()).joke;

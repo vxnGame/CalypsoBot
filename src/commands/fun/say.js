@@ -7,9 +7,9 @@ module.exports = class SayCommand extends Command {
 			name: 'say',
 			usage: 'say [channel mention/ID] <message>',
 			description: oneLine`
-        Sends a message to the specified channel.
-        If no channel is given, then the message will be sent to the current channel.
-      `,
+			Sends a message to the specified channel.
+			If no channel is given, then the message will be sent to the current channel.
+			`,
 			type: client.types.FUN,
 			examples: ['say #general hello world'],
 		});
@@ -24,8 +24,8 @@ module.exports = class SayCommand extends Command {
 		// Check type and viewable
 		if (channel.type != 'text' || !channel.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-      Please mention an accessible text channel or provide a valid text channel ID
-    `);
+			Please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 
 		// Get mod channels
@@ -33,8 +33,8 @@ module.exports = class SayCommand extends Command {
 		if (typeof (modChannelIds) === 'string') modChannelIds = modChannelIds.split(' ');
 		if (modChannelIds.includes(channel.id)) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-      Provided channel is moderator only, please mention an accessible text channel or provide a valid text channel ID
-    `);
+			Provided channel is moderator only, please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 
 		if (!args[0]) return this.sendErrorMessage(message, 0, 'Please provide a message for me to say');

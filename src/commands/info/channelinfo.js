@@ -19,9 +19,9 @@ module.exports = class ChannelInfoCommand extends Command {
 			aliases: ['channel', 'ci'],
 			usage: 'channelinfo [channel mention/ID]',
 			description: oneLine`
-        Fetches information about the provided channel.
-        If no channel is given, the current channel will be used.
-      `,
+			Fetches information about the provided channel.
+			If no channel is given, the current channel will be used.
+			`,
 			type: client.types.INFO,
 			examples: ['channelinfo #general'],
 		});
@@ -45,16 +45,19 @@ module.exports = class ChannelInfoCommand extends Command {
 			.setTimestamp()
 			.setColor(message.guild.me.displayHexColor);
 		if (channel.type === 'text') {
-			embed // Text embed
+			// Text embed
+			embed
 				.spliceFields(3, 0, { name: 'Rate Limit', value: `\`${channel.rateLimitPerUser}\``, inline: true })
 				.spliceFields(6, 0, { name: 'NSFW', value: `\`${channel.nsfw}\``, inline: true });
 		}
 		else if (channel.type === 'news') {
-			embed // News embed
+			// News embed
+			embed
 				.spliceFields(6, 0, { name: 'NSFW', value: `\`${channel.nsfw}\``, inline: true });
 		}
 		else if (channel.type === 'voice') {
-			embed // Voice embed
+			// Voice embed
+			embed
 				.spliceFields(0, 1, { name: 'Channel', value: `${voice} ${channel.name}`, inline: true })
 				.spliceFields(5, 0, { name: 'User Limit', value: `\`${channel.userLimit}\``, inline: true })
 				.spliceFields(6, 0, { name: 'Full', value: `\`${channel.full}\``, inline: true });
@@ -63,8 +66,8 @@ module.exports = class ChannelInfoCommand extends Command {
 		}
 		else {
 			return this.sendErrorMessage(message, 0, stripIndent`
-      Please enter mention a valid text or announcement channel` +
-      ' or provide a valid text, announcement, or voice channel ID',
+			Please enter mention a valid text or announcement channel` +
+			' or provide a valid text, announcement, or voice channel ID',
 			);
 		}
 		if (channel.topic) embed.addField('Topic', channel.topic);

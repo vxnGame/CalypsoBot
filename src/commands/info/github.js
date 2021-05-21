@@ -17,9 +17,9 @@ module.exports = class GitHubCommand extends Command {
 			.setTitle('GitHub Link')
 			.setThumbnail('https://cdn.discordapp.com/attachments/831673153716748318/839805709449560064/200.jpg')
 			.setDescription(oneLine`
-        Click [here]([Your repository URL]) to to visit my GitHub repository!
-        Please support me by starring ⭐ the repo, and feel free to comment about issues or suggestions!
-      `)
+			Click [here]([Your repository URL]) to to visit my GitHub repository!
+			Please support me by starring ⭐ the repo, and feel free to comment about issues or suggestions!
+			`)
 			.addField('Other Links',
 				'**[Invite Me]([Your oauth2 URL]) | ' +
         '[Support Server]([Your Support Server URL])**',

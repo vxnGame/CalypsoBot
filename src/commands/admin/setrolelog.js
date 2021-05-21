@@ -10,9 +10,9 @@ module.exports = class SetRoleLogCommand extends Command {
 			aliases: ['setrl', 'srl'],
 			usage: 'setrolelog <channel mention/ID>',
 			description: oneLine`
-        Sets the role change log text channel for your server.
-        Provide no channel to clear the current \`role log\`.
-      `,
+			Sets the role change log text channel for your server.
+			Provide no channel to clear the current \`role log\`.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setrolelog #bot-log'],
@@ -38,8 +38,8 @@ module.exports = class SetRoleLogCommand extends Command {
 		const roleLog = this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
 		if (!roleLog || roleLog.type != 'text' || !roleLog.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        Please mention an accessible text channel or provide a valid text channel ID
-      `);
+			Please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 		message.client.db.settings.updateRoleLogId.run(roleLog.id, message.guild.id);
 		message.channel.send(embed.addField('Role Log', `${oldRoleLog} ➔ ${roleLog}`));

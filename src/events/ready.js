@@ -102,7 +102,8 @@ module.exports = async (client) => {
 			try {
 				await verificationChannel.messages.fetch(verificationMessageId);
 			}
-			catch (err) { // Message was deleted
+			// Message was deleted
+			catch (err) {
 				client.logger.error(err);
 			}
 		}

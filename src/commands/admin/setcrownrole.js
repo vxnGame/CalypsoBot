@@ -10,10 +10,10 @@ module.exports = class SetCrownRoleCommand extends Command {
 			aliases: ['setcr', 'scr'],
 			usage: 'setcrownrole <role mention/ID>',
 			description: oneLine`
-        Sets the role vxn's minions will give to the member with the most points each cycle.
-        Provide no role to clear the current \`crown role\`.
-        A \`crown schedule\` must also be set to enable role rotation.
-      `,
+			Sets the role vxn's minions will give to the member with the most points each cycle.
+			Provide no role to clear the current \`crown role\`.
+			A \`crown schedule\` must also be set to enable role rotation.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setcrownrole @Crowned'],
@@ -49,7 +49,8 @@ module.exports = class SetCrownRoleCommand extends Command {
 		// Clear role
 		if (args.length === 0) {
 			message.client.db.settings.updateCrownRoleId.run(null, message.guild.id);
-			if (message.guild.job) message.guild.job.cancel(); // Cancel old job
+			// Cancel old job
+			if (message.guild.job) message.guild.job.cancel();
 
 			message.client.logger.info(`${message.guild.name}: Cancelled job`);
 

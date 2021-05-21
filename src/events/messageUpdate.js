@@ -2,7 +2,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = (client, oldMessage, newMessage) => {
 
-	if (newMessage.webhookID) return; // Check for webhook
+	// Check for webhook
+	if (newMessage.webhookID) return;
 
 	// Detect edited commands
 	if (
@@ -31,8 +32,8 @@ module.exports = (client, oldMessage, newMessage) => {
 		const messageEditLog = newMessage.guild.channels.cache.get(messageEditLogId);
 		if (
 			messageEditLog &&
-      messageEditLog.viewable &&
-      messageEditLog.permissionsFor(newMessage.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+			messageEditLog.viewable &&
+			messageEditLog.permissionsFor(newMessage.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 
 			if (newMessage.content.length > 1024) newMessage.content = newMessage.content.slice(0, 1021) + '...';
@@ -56,8 +57,8 @@ module.exports = (client, oldMessage, newMessage) => {
 		const messageDeleteLog = newMessage.guild.channels.cache.get(messageDeleteLogId);
 		if (
 			messageDeleteLog &&
-      messageDeleteLog.viewable &&
-      messageDeleteLog.permissionsFor(newMessage.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+			messageDeleteLog.viewable &&
+			messageDeleteLog.permissionsFor(newMessage.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 
 			embed.setTitle('Message Update: `Delete`');

@@ -9,10 +9,10 @@ module.exports = class SetNicknameCommand extends Command {
 			aliases: ['setnn', 'snn'],
 			usage: 'setnickname <user mention/ID> <nickname> [reason]',
 			description: oneLine`
-        Changes the provided user's nickname to the one specified.
-        Surround the new nickname in quotes if it is more than one word.
-        The nickname cannot be larger than 32 characters.
-      `,
+			Changes the provided user's nickname to the one specified.
+			Surround the new nickname in quotes if it is more than one word.
+			The nickname cannot be larger than 32 characters.
+			`,
 			type: client.types.MOD,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_NICKNAMES'],
 			userPermissions: ['MANAGE_NICKNAMES'],
@@ -25,8 +25,8 @@ module.exports = class SetNicknameCommand extends Command {
 		if (!member) {return this.sendErrorMessage(message, 0, 'Please mention a user or provide a valid user ID');}
 		if (member.roles.highest.position >= message.member.roles.highest.position && member != message.member) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        You cannot change the nickname of someone with an equal or higher role
-      `);
+			You cannot change the nickname of someone with an equal or higher role
+			`);
 		}
 
 		if (!args[1]) return this.sendErrorMessage(message, 0, 'Please provide a nickname');

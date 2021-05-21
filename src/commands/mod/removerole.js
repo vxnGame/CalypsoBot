@@ -27,8 +27,10 @@ module.exports = class RemoveRoleCommand extends Command {
 		if (reason.length > 1024) reason = reason.slice(0, 1021) + '...';
 
 		if (!role) {return this.sendErrorMessage(message, 0, 'Please mention a role or provide a valid role ID');}
-		else if (!member.roles.cache.has(role.id)) // If member doesn't have role
-		{return this.sendErrorMessage(message, 0, 'User does not have the provided role');}
+		// If member doesn't have role
+		else if (!member.roles.cache.has(role.id)) {
+			return this.sendErrorMessage(message, 0, 'User does not have the provided role');
+		}
 		else {
 			try {
 

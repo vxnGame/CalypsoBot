@@ -10,14 +10,14 @@ module.exports = class SetFarewellMessageCommand extends Command {
 			aliases: ['setfarewellmsg', 'setfm', 'sfm'],
 			usage: 'setfarewellmessage <message>',
 			description: oneLine`
-        Sets the message vxn's minions will say when someone leaves your server.
-        You may use \`?member\` to substitute for a user mention,
-        \`?username\` to substitute for someone's username,
-        \`?tag\` to substitute for someone's full Discord tag (username + discriminator),
-        and \`?size\` to substitute for your server's current member count.
-        Enter no message to clear the current \`farewell message\`.
-        A \`farewell channel\` must also be set to enable farewell messages.
-      `,
+			Sets the message vxn's minions will say when someone leaves your server.
+			You may use \`?member\` to substitute for a user mention,
+			\`?username\` to substitute for someone's username,
+			\`?tag\` to substitute for someone's full Discord tag (username + discriminator),
+			and \`?size\` to substitute for your server's current member count.
+			Enter no message to clear the current \`farewell message\`.
+			A \`farewell channel\` must also be set to enable farewell messages.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setfarewellmessage ?member has left the server.'],
@@ -26,7 +26,7 @@ module.exports = class SetFarewellMessageCommand extends Command {
 	run(message, args) {
 
 		const { farewell_channel_id: farewellChannelId, farewell_message: oldFarewellMessage } =
-      message.client.db.settings.selectFarewells.get(message.guild.id);
+		message.client.db.settings.selectFarewells.get(message.guild.id);
 		const farewellChannel = message.guild.channels.cache.get(farewellChannelId);
 
 		// Get status

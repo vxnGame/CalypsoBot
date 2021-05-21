@@ -10,12 +10,12 @@ module.exports = class SetVerificationChannelCommand extends Command {
 			aliases: ['setvc', 'svc'],
 			usage: 'setverificationchannel <channel mention/ID>',
 			description: oneLine`
-        Sets the verification text channel for your server. If set, unverified members will start here.
-        Once verified, the \`verification role\` will be assigned to them.
-        Please ensure that new members are not able access other server channels for proper verification.
-        A \`verification channel\`, a \`verification message\`,
-        and an \`verification role\` must be set to enable server verification.
-      `,
+			Sets the verification text channel for your server. If set, unverified members will start here.
+			Once verified, the \`verification role\` will be assigned to them.
+			Please ensure that new members are not able access other server channels for proper verification.
+			A \`verification channel\`, a \`verification message\`,
+			and an \`verification role\` must be set to enable server verification.
+			`,
 			type: client.types.ADMIN,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'ADD_REACTIONS'],
 			userPermissions: ['MANAGE_GUILD'],
@@ -60,7 +60,8 @@ module.exports = class SetVerificationChannelCommand extends Command {
 				try {
 					await oldVerificationChannel.messages.delete(verificationMessageId);
 				}
-				catch (err) { // Message was deleted
+				// Message was deleted
+				catch (err) {
 					message.client.logger.error(err);
 				}
 			}
@@ -76,11 +77,11 @@ module.exports = class SetVerificationChannelCommand extends Command {
 		}
 
 		const verificationChannel =
-      this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
+		this.getChannelFromMention(message, args[0]) || message.guild.channels.cache.get(args[0]);
 		if (!verificationChannel || verificationChannel.type != 'text' || !verificationChannel.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-        Please mention an accessible text channel or provide a valid text channel ID
-      `);
+			Please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 
 		// Update status
@@ -103,7 +104,8 @@ module.exports = class SetVerificationChannelCommand extends Command {
 				try {
 					await verificationChannel.messages.fetch(verificationMessageId);
 				}
-				catch (err) { // Message was deleted
+				// Message was deleted
+				catch (err) {
 					message.client.logger.error(err);
 				}
 				const msg = await verificationChannel.send(new MessageEmbed()
@@ -115,8 +117,8 @@ module.exports = class SetVerificationChannelCommand extends Command {
 			}
 			else {
 				return message.client.sendSystemErrorMessage(message.guild, 'verification', stripIndent`
-          Unable to send verification message, please ensure I have permission to access the verification channel
-        `);
+				Unable to send verification message, please ensure I have permission to access the verification channel
+				`);
 			}
 		}
 	}

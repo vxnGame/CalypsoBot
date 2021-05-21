@@ -14,8 +14,8 @@ module.exports = class AvatarCommand extends Command {
 	}
 	run(message, args) {
 		const member = this.getMemberFromMention(message, args[0]) ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+		message.guild.members.cache.get(args[0]) ||
+		message.member;
 		const embed = new MessageEmbed()
 			.setTitle(`${member.displayName}'s Avatar`)
 			.setImage(member.user.displayAvatarURL({ dynamic: true, size: 512 }))

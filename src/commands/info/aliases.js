@@ -10,9 +10,9 @@ module.exports = class AliasesCommand extends Command {
 			aliases: ['alias', 'ali', 'a'],
 			usage: 'aliases [command type]',
 			description: oneLine`
-        Displays a list of all current aliases for the given command type.
-        If no command type is given, the amount of aliases for every type will be displayed.
-      `,
+			Displays a list of all current aliases for the given command type.
+			If no command type is given, the amount of aliases for every type will be displayed.
+			`,
 			type: client.types.INFO,
 			examples: ['aliases Fun'],
 		});
@@ -78,9 +78,9 @@ module.exports = class AliasesCommand extends Command {
 			embed
 				.setTitle('vxn\'s Alias Types')
 				.setDescription(stripIndent`
-          **Prefix:** \`${prefix}\`
-          **More Information:** \`${prefix}aliases [command type]\`
-        `)
+				**Prefix:** \`${prefix}\`
+				**More Information:** \`${prefix}aliases [command type]\`
+				`)
 				.setImage('https://cdn.discordapp.com/attachments/831673153716748318/839805792604913694/300.jpg')
 				.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
 				.setTimestamp()
@@ -100,8 +100,8 @@ module.exports = class AliasesCommand extends Command {
 			embed.addField(
 				'**Links**',
 				'**[Invite Me]([Your oauth2 URL]) | ' +
-        '[Support Server]([Your Support Server URL]) | ' +
-        '[Repository]([Your repository URL])**',
+				'[Support Server]([Your Support Server URL]) | ' +
+				'[Repository]([Your repository URL])**',
 			);
 
 		}

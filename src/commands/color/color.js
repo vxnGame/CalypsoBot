@@ -9,8 +9,8 @@ module.exports = class ColorCommand extends Command {
 			aliases: ['changecolor', 'colour', 'c'],
 			usage: 'color <role mention/ID | color name>',
 			description: oneLine`
-        Changes your current color to the one specified. Provide no color to clear your current color role.
-      `,
+			Changes your current color to the one specified. Provide no color to clear your current color role.
+			`,
 			type: client.types.COLOR,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_ROLES'],
 			examples: ['color Red'],
@@ -47,7 +47,7 @@ module.exports = class ColorCommand extends Command {
 		if (!color) {
 			color = colors.find(c => {
 				return colorName == c.name.slice(1).toLowerCase().replace(/\s/g, '') ||
-          colorName == c.name.toLowerCase().replace(/\s/g, '');
+				colorName == c.name.toLowerCase().replace(/\s/g, '');
 			});
 		}
 		// Color does not exist

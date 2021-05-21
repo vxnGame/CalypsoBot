@@ -9,10 +9,10 @@ module.exports = class SlowmodeCommand extends Command {
 			aliases: ['slow', 'sm'],
 			usage: 'slowmode [channel mention/ID] <rate> [reason]',
 			description: oneLine`
-        Enables slowmode in a channel with the specified rate.
-        If no channel is provided, then slowmode will affect the current channel.
-        Provide a rate of 0 to disable.
-      `,
+			Enables slowmode in a channel with the specified rate.
+			If no channel is provided, then slowmode will affect the current channel.
+			Provide a rate of 0 to disable.
+			`,
 			type: client.types.MOD,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_CHANNELS'],
 			userPermissions: ['MANAGE_CHANNELS'],
@@ -30,15 +30,15 @@ module.exports = class SlowmodeCommand extends Command {
 		// Check type and viewable
 		if (channel.type != 'text' || !channel.viewable) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-      Please mention an accessible text channel or provide a valid text channel ID
-    `);
+			Please mention an accessible text channel or provide a valid text channel ID
+			`);
 		}
 
 		const rate = args[index];
 		if (!rate || rate < 0 || rate > 59) {
 			return this.sendErrorMessage(message, 0, stripIndent`
-      Please provide a rate limit between 0 and 59 seconds
-    `);
+			Please provide a rate limit between 0 and 59 seconds
+			`);
 		}
 
 		// Check channel permissions
@@ -48,7 +48,8 @@ module.exports = class SlowmodeCommand extends Command {
 		if (!reason) reason = '`None`';
 		if (reason.length > 1024) reason = reason.slice(0, 1021) + '...';
 
-		await channel.setRateLimitPerUser(rate, reason); // set channel rate
+		// set channel rate
+		await channel.setRateLimitPerUser(rate, reason);
 		const status = (channel.rateLimitPerUser) ? 'enabled' : 'disabled';
 		const embed = new MessageEmbed()
 			.setTitle('Slowmode')

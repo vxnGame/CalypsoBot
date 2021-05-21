@@ -8,9 +8,9 @@ module.exports = class SoftBanCommand extends Command {
 			name: 'softban',
 			usage: 'softban <user mention/ID> [reason]',
 			description: oneLine`
-        Softbans a member from your server (bans then immediately unbans).
-        This wipes all messages from that member from your server.
-      `,
+			Softbans a member from your server (bans then immediately unbans).
+			This wipes all messages from that member from your server.
+			`,
 			type: client.types.MOD,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'BAN_MEMBERS'],
 			userPermissions: ['BAN_MEMBERS'],

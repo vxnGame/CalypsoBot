@@ -10,11 +10,11 @@ module.exports = class SetVerificationMessageCommand extends Command {
 			aliases: ['setverificationmsg', 'setvm', 'svm'],
 			usage: 'setverificationmessage <message>',
 			description: oneLine`
-        Sets the message vxn's minions will post in the \`verification channel\`.
-        Enter no message to clear the verification message.
-        A \`verification role\`, a \`verification channel\`,
-        and a \`verification message\` must be set to enable server verification.
-      `,
+			Sets the message vxn's minions will post in the \`verification channel\`.
+			Enter no message to clear the verification message.
+			A \`verification role\`, a \`verification channel\`,
+			and a \`verification message\` must be set to enable server verification.
+			`,
 			type: client.types.ADMIN,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'ADD_REACTIONS'],
 			userPermissions: ['MANAGE_GUILD'],
@@ -55,7 +55,8 @@ module.exports = class SetVerificationMessageCommand extends Command {
 				try {
 					await verificationChannel.messages.delete(verificationMessageId);
 				}
-				catch (err) { // Message was deleted
+				// Message was deleted
+				catch (err) {
 					message.client.logger.error(err);
 				}
 			}
@@ -89,7 +90,8 @@ module.exports = class SetVerificationMessageCommand extends Command {
 				try {
 					await verificationChannel.messages.fetch(verificationMessageId);
 				}
-				catch (err) { // Message was deleted
+				// Message was deleted
+				catch (err) {
 					message.client.logger.error(err);
 				}
 				const msg = await verificationChannel.send(new MessageEmbed()
@@ -101,8 +103,8 @@ module.exports = class SetVerificationMessageCommand extends Command {
 			}
 			else {
 				return message.client.sendSystemErrorMessage(message.guild, 'verification', stripIndent`
-          Unable to send verification message, please ensure I have permission to access the verification channel
-        `);
+				Unable to send verification message, please ensure I have permission to access the verification channel
+				`);
 			}
 		}
 	}

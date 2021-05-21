@@ -10,15 +10,15 @@ module.exports = class SetCrownMessageCommand extends Command {
 			aliases: ['setcrownmsg', 'setcm', 'scm'],
 			usage: 'setcrownmessage <message>',
 			description: oneLine`
-        Sets the message vxn's minions will say during the crown role rotation.
-        You may use \`?member\` to substitute for a user mention ,
-        \`?username\` to substitute for someone's username,
-        \`?tag\` to substitute for someone's full Discord tag (username + discriminator),
-        \`?role\` to substitute for the \`crown role\`,
-        and \`?points\` to substitute for the current points of the winner.
-        Enter no message to clear the current \`crown message\`.
-        A \`crown message\` will only be sent if a \`crown channel\`, \`crown role\`, and \`crown schedule\` are set.
-      `,
+			Sets the message vxn's minions will say during the crown role rotation.
+			You may use \`?member\` to substitute for a user mention ,
+			\`?username\` to substitute for someone's username,
+			\`?tag\` to substitute for someone's full Discord tag (username + discriminator),
+			\`?role\` to substitute for the \`crown role\`,
+			and \`?points\` to substitute for the current points of the winner.
+			Enter no message to clear the current \`crown message\`.
+			A \`crown message\` will only be sent if a \`crown channel\`, \`crown role\`, and \`crown schedule\` are set.
+			`,
 			type: client.types.ADMIN,
 			userPermissions: ['MANAGE_GUILD'],
 			examples: ['setcrownmessage ?member has won the ?role!'],

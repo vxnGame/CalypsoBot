@@ -305,7 +305,7 @@ exports.msg_ID10 = '';
 // auto roles
 exports.msg_ID11 = '841423781028954162';
 // auto roles
-exports.msg_ID12 = '841425681614241822';
+exports.msg_ID2 = '841418185554001950';
 // auto roles
 exports.msg_ID13 = '841427692511035463';
 // auto roles
